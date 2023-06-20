@@ -13,4 +13,9 @@ export const findAllMeals = async() => {
     return meals
 }
 export const updateMeal = async () => {}
-export const deleteMeal = async () => {}
+
+export const deleteMeal = async (mid) => {
+    const response = await axios.delete(`${Meal_API_URL}/${mid}`)
+    const status = response.data
+    return mid;
+}

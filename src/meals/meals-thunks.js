@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {createMeal, findAllMeals} from "./meals-service";
+import {createMeal, deleteMeal, findAllMeals} from "./meals-service";
 
 export const createMealsThunk = createAsyncThunk(
     'createMeal',
@@ -17,4 +17,7 @@ export const findAllMealsThunk = createAsyncThunk(
 
 export const updateMealsThunk = {}
 
-export const deleteMealsThunk = {}
+export const deleteMealsThunk = createAsyncThunk(
+    'deleteMeal',
+    (mid) => deleteMeal(mid)
+)

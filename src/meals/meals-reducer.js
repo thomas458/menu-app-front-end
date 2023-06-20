@@ -1,17 +1,24 @@
-import meals from "./index";
-import {findAllMealsThunk, createMealsThunk} from "./meals-thunks";
+import {findAllMealsThunk, createMealsThunk, deleteMealsThunk} from "./meals-thunks";
 import {createSlice} from "@reduxjs/toolkit";
+const initialState = {
+    meals:[],
+    loading: true
+}
 
 const mealsReducer = createSlice({
     name: 'meals',
-    initialState: [],
-    extraReducer: {
+    initialState: initialState,
+    extraReducers: {
         [findAllMealsThunk.fulfilled]: (state, action) =>{
-            state = action.payload
+            state.meals = action.payload
+            console.log("payload", action.payload)
         },
         [createMealsThunk.fulfilled]: (state, action) =>{
             console.log("thunk", action.payload)
-            state.push(action.payload)
+            state.meals.push(action.payload)
+        },
+        [deleteMealsThunk.fulfilled]: (state, action) => {
+            state.meals = state.meals.filter(m => m._id !== action.payload)
         }
     }
 })
