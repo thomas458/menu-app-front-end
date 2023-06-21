@@ -4,7 +4,6 @@ import Search from "./search/index"
 import Login from "./users/login"
 import Meals from "./meals/index"
 import Users from "./users/index"
-import moviesReducer from "./meals/meals-reducer"
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import { Navigate } from 'react-router-dom';
@@ -17,13 +16,15 @@ import usersReducer from "./users/usersReducer";
 import Register from "./users/register";
 import CurrentUser from "./users/current-user";
 import MealdbDetails from "./mealdb/mealdb-details";
+import reviewsReducer from "./reviews/reviews-reducer";
 
 const store = configureStore({
     reducer: {
         meals: mealsReducer,
         mealdb: mealdbReducer,
         likes: likesReducer,
-        users: usersReducer
+        users: usersReducer,
+        reviews: reviewsReducer
     }
 })
 
