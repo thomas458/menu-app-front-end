@@ -20,3 +20,8 @@ export const likeAlbum = async (albumId, album) => {
     );
     return response.data;
 };
+
+export const findAlbumsILike = async () => {
+    const response = await request.get(`http://localhost:4000/api/albums/i/like`);
+    return response.data;
+};
