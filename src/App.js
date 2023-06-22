@@ -38,17 +38,17 @@ function App() {
                 <CurrentUser>
                       <Routes>
                           <Route path= "/"          element={<Navigate to="/home"/>}/>
-                          <Route path= "/home"    element={<Home/>}/>
-                          <Route path= "/login"    element={<Login/>}/>
+                          <Route path= "/home/*"    element={<Home/>}/>
+                          <Route path= "/login/*"    element={<Login/>}/>
                           <Route path= "/profile/*" element={
                               <ProtectedRoute>
-                                <Profile/>
+                                  <Profile/>
                               </ProtectedRoute>
                           }/>
-
-                          <Route path= "/search" element={<Search/>}/>
-                          <Route path= "/meals" element={<Meals/>}/>
-                          <Route path= "/users" element={<Users/>}/>
+                          <Route path= "/search/" element={<Search/>}/>
+                          <Route path="/search/:searchTerm" element={<Search />} />
+                          <Route path= "/meals/*" element={<Meals/>}/>
+                          <Route path= "/users/*" element={<Users/>}/>
                           <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
                           <Route path= "/register" element={<Register/>}/>
                       </Routes>
