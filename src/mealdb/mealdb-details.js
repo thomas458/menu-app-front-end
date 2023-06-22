@@ -12,8 +12,19 @@ const MealdbDetails = () => {
     const {reviews} = useSelector((state) => state.reviews)
     const {details} = useSelector((state) => state.mealdb)
     const {currentUser} = useSelector((state) => state.users)
+
+    const [albumsIlike, setAlbumsIlike] = useState([]);
+
+    const fetchMyLikes = async () => {
+        const albums = await service.findAlbumsILike();
+        setAlbumsIlike(albums);
+    };
+
+
+
     const dispatch = useDispatch()
     useEffect(() => {
+        fetchMyLikes();
         dispatch(findMealByMealIdThunk(idMeal))
         dispatch(findReviewsByMealThunk(idMeal))
     }, [])
@@ -34,18 +45,17 @@ const MealdbDetails = () => {
     //console.log(details.meals[0].strMealThumb)
     //console.log("review", reviews)
 
-    const extractYouTubeVideoId=()=> {
-
+    const getlink=()=> {
         let tmp = "";
         if (details && details.meals) {
             tmp = details.meals[0]
         }
-        const urlObj = new URL(tmp.strYoutube);
-        const searchParams = new URLSearchParams(urlObj.search);
-        const videoId = searchParams.get('v');
-        const str="https://www.youtube.com/embed/"+videoId;
+        const cururl = new URL(tmp.strYoutube);
+        const searchParams = new URLSearchParams(cururl.search);
+        const vid = searchParams.get('v');
+        const str="https://www.youtube.com/embed/"+vid;
         console.log(str);
-        return "https://www.youtube.com/embed/"+videoId;
+        return "https://www.youtube.com/embed/"+vid;
     }
 
     const handleLikeAlbum = async () => {
@@ -75,15 +85,14 @@ const MealdbDetails = () => {
                 </div>
 
                 {meals && meals.strYoutube && (
-                    <iframe className="mt-3" height="500" src={extractYouTubeVideoId()} frameBorder="0" allowFullScreen></iframe>
+                    <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
                 )}
 
                 <hr />
                 {currentUser && (
                     <div>
                         <button onClick={handleLikeAlbum}>Like</button>
-                        <button>Dislike</button>
-                        <textarea></textarea>
+                        {/*<button>Dislike</button>*/}
                     </div>
                 )}
                 <hr />
@@ -113,7 +122,8 @@ const MealdbDetails = () => {
                         ))}
                 </ul>
             </div>
-            <pre>{JSON.stringify(details, null, 2)}</pre>
+            <pre>{JSON.stringify(albumsIlike, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(details, null, 2)}</pre>*/}
         </>
     );
 }
