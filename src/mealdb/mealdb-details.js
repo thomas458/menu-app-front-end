@@ -37,21 +37,22 @@ const MealdbDetails = () => {
             <Nav/>
             <h1>{title}</h1>
             <div className="row">
-                <div className="col">
+                <div className="col-4">
+                    <img className="img-fluid" src={meals.strMealThumb}/>
+                </div>
+                <div className="col-8">
                     <ul className="list-group">
                         <li className="list-group-item">{meals.strCategory}</li>
                         <li className="list-group-item">{meals.strArea}</li>
                         <li className="list-group-item">{meals.strInstructions}</li>
                     </ul>
                 </div>
-                <div className="col">
-                    <img src={meals.strMealThumb}/>
-                </div>
+
                 {currentUser && (
                     <div>
                     <textarea
                         onChange={(e) => setReview(e.target.value)}
-                        className="form-control"
+                        className="form-control mt-3"
                     ></textarea>
                         <button className="btn btn-success" onClick={handlePostReviewBtn}>
                             Post Review

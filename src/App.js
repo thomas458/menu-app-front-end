@@ -40,7 +40,8 @@ function App() {
                           <Route path= "/home/*"    element={<Home/>}/>
                           <Route path= "/login/*"    element={<Login/>}/>
                           <Route path= "/profile/*" element={<Profile/>}/>
-                          <Route path= "/search/*" element={<Search/>}/>
+                          <Route path= "/search/" element={<Search/>}/>
+                          <Route path="/search/:searchTerm" element={<Search />} />
                           <Route path= "/meals/*" element={<Meals/>}/>
                           <Route path= "/users/*" element={<Users/>}/>
                           <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
