@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {findMealByMealIdThunk} from "./mealdb-thunks";
 import {useEffect, useState} from "react";
 import Nav from "../nav";
+import * as service from "../likes/likes-service";
 import {createReviewThunk, findReviewsByMealThunk} from "../reviews/reviews-thunks";
 
 const MealdbDetails = () => {
@@ -22,16 +23,40 @@ const MealdbDetails = () => {
             idMeal
         }))
     }
-    var title = "Meals"
+    let title = "Meals";
     if (details && details.meals) {
         title = details.meals[0].strMeal
     }
-    var meals = ""
+    let meals = "";
     if (details && details.meals) {
         meals = details.meals[0]
     }
     //console.log(details.meals[0].strMealThumb)
-    console.log("review", reviews)
+    //console.log("review", reviews)
+
+    const extractYouTubeVideoId=()=> {
+
+        let tmp = "";
+        if (details && details.meals) {
+            tmp = details.meals[0]
+        }
+        const urlObj = new URL(tmp.strYoutube);
+        const searchParams = new URLSearchParams(urlObj.search);
+        const videoId = searchParams.get('v');
+        const str="https://www.youtube.com/embed/"+videoId;
+        console.log(str);
+        return "https://www.youtube.com/embed/"+videoId;
+    }
+
+    const handleLikeAlbum = async () => {
+        const album = await service.likeAlbum(idMeal, {
+            id: meals.idMeal,
+            name: meals.strMeal,
+        });
+    };
+
+
+
     return (
         <>
             <Nav/>
@@ -46,7 +71,22 @@ const MealdbDetails = () => {
                         <li className="list-group-item">{meals.strArea}</li>
                         <li className="list-group-item">{meals.strInstructions}</li>
                     </ul>
+
                 </div>
+
+                {meals && meals.strYoutube && (
+                    <iframe className="mt-3" height="500" src={extractYouTubeVideoId()} frameBorder="0" allowFullScreen></iframe>
+                )}
+
+                <hr />
+                {currentUser && (
+                    <div>
+                        <button onClick={handleLikeAlbum}>Like</button>
+                        <button>Dislike</button>
+                        <textarea></textarea>
+                    </div>
+                )}
+                <hr />
 
                 {currentUser && (
                     <div>
@@ -59,7 +99,7 @@ const MealdbDetails = () => {
                         </button>
                     </div>
                 )}
-                <ul className="list-group">
+                <ul className="list-group mt-3">
                     {
                         reviews.map((review) => (
 
