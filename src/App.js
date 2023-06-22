@@ -4,6 +4,7 @@ import Search from "./search/index"
 import Login from "./users/login"
 import Meals from "./meals/index"
 import Users from "./users/index"
+import ProtectedRoute from "./users/protected-route"
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import { Navigate } from 'react-router-dom';
@@ -37,14 +38,19 @@ function App() {
                 <CurrentUser>
                       <Routes>
                           <Route path= "/"          element={<Navigate to="/home"/>}/>
-                          <Route path= "/home/*"    element={<Home/>}/>
-                          <Route path= "/login/*"    element={<Login/>}/>
-                          <Route path= "/profile/*" element={<Profile/>}/>
-                          <Route path= "/search/*" element={<Search/>}/>
-                          <Route path= "/meals/*" element={<Meals/>}/>
-                          <Route path= "/users/*" element={<Users/>}/>
+                          <Route path= "/home"    element={<Home/>}/>
+                          <Route path= "/login"    element={<Login/>}/>
+                          <Route path= "/profile/*" element={
+                              <ProtectedRoute>
+                                <Profile/>
+                              </ProtectedRoute>
+                          }/>
+
+                          <Route path= "/search" element={<Search/>}/>
+                          <Route path= "/meals" element={<Meals/>}/>
+                          <Route path= "/users" element={<Users/>}/>
                           <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
-                          <Route path= "/register/*" element={<Register/>}/>
+                          <Route path= "/register" element={<Register/>}/>
                       </Routes>
                 </CurrentUser>
             </Provider>

@@ -1,5 +1,6 @@
 import axios from "axios";
 const BASE_URL = 'http://localhost:4000'
+const USER_API_URL ='http://localhost:4000/users';
 const api = axios.create({ withCredentials: true });
 
 
@@ -36,3 +37,7 @@ export const logout = async () => {
 
 export const deleteUser = async (uid) => {}
 export const updateUser = async (uid, userUpdates) => {}
+
+export const findUserById = async (uid) => {
+    const response = await api.post(`${USER_API_URL}/${uid}`)
+}

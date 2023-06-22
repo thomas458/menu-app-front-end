@@ -1,12 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
 import Nav from "../nav";
 import {logoutThunk} from "./users-thunk";
+import {useNavigate} from "react-router";
 
 const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const handleLogout = () => {
         dispatch(logoutThunk())
+        navigate('/login')
     }
     return(
         <>
