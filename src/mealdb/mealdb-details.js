@@ -32,7 +32,8 @@ const MealdbDetails = () => {
         dispatch(createReviewThunk({
             review,
             idMeal
-        }))
+        }));
+        dispatch(findReviewsByMealThunk(idMeal));
     }
     let title = "Meals";
     if (details && details.meals) {

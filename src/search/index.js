@@ -14,6 +14,7 @@ function Search(){
     if (searchTerm) {
       setQuery(searchTerm);
       dispatch(findMealBySearchTermThunk(query))
+      setQuery("");
     }
   }, [searchTerm]);
     const{meals, loading} = useSelector((state) => state.mealdb)
