@@ -153,8 +153,8 @@ const MealdbDetails = () => {
                         ))}
                 </ul>
             </div>
-            <pre>{JSON.stringify(albumsIlike, null, 2)}</pre>
-            <pre>{JSON.stringify(currentUser, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(albumsIlike, null, 2)}</pre>*/}
+            {/*<pre>{JSON.stringify(currentUser, null, 2)}</pre>*/}
             {/*<pre>{JSON.stringify(details, null, 2)}</pre>*/}
         </>
     );
