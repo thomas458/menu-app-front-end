@@ -2,6 +2,7 @@ import {useState} from "react";
 import Nav from "../nav";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk, registerThunk} from "./users-thunk";
+import {useNavigate} from "react-router";
 
 const Login = () => {
     const[username, setUsername] = useState('alice')
@@ -10,10 +11,12 @@ const Login = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const handleLoginBtn = () => {
         setError(null)
         const loginUser = {username, password}
         dispatch(loginThunk(loginUser))
+        navigate("/profile");
 
     }
     return(
@@ -26,14 +29,15 @@ const Login = () => {
                     {error}
                 </div>
             }
-
-            <input
+            <label for="username">Username</label>
+            <input id="username"
                 className="form-control mb-2"
-                value={username}
+                // value={username}
                 onChange={(e) => setUsername(e.target.value)}/>
-            <input
+            <label for="password">Password</label>
+            <input id="password"
                 className="form-control mb-2"
-                value={password}
+                // value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             <button
                 onClick={handleLoginBtn}
