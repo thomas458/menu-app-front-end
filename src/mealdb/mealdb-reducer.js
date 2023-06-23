@@ -1,5 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findMealByMealIdThunk, findMealBySearchTermThunk, getRandomMealsThunk} from "./mealdb-thunks";
+import {
+    findMealByIdThunk,
+    findMealByMealIdThunk,
+    findMealBySearchTermThunk,
+    getRandomMealsThunk
+} from "./mealdb-thunks";
 
 const initialState = {
     meals: [],

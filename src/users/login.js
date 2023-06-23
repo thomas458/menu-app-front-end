@@ -11,13 +11,13 @@ const Login = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const handleLoginBtn = async () => {
+
+    const navigate = useNavigate();
+    const handleLoginBtn = () => {
         setError(null)
         const loginUser = {username, password}
-        await dispatch(loginThunk(loginUser))
-        navigate('/profile')
-
+        dispatch(loginThunk(loginUser))
+        navigate("/profile");
 
     }
     return(
@@ -30,14 +30,15 @@ const Login = () => {
                     {error}
                 </div>
             }
-
-            <input
+            <label for="username">Username</label>
+            <input id="username"
                 className="form-control mb-2"
-                value={username}
+                // value={username}
                 onChange={(e) => setUsername(e.target.value)}/>
-            <input
+            <label for="password">Password</label>
+            <input id="password" type="password"
                 className="form-control mb-2"
-                value={password}
+                // value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             <button
                 onClick={handleLoginBtn}
