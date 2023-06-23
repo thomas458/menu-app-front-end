@@ -19,3 +19,8 @@ export const findReviewsByAuthor = async (author) => {
     const response = await api.get(`${AUTHOR_REVIEWS_API}/${author}/reviews`)
     return response.data
 }
+
+export const findReviewsByAuthorId = async (authorId) => {
+    const response = await api.get(`${AUTHOR_REVIEWS_API}/${authorId}`)
+    return response.data
+}
