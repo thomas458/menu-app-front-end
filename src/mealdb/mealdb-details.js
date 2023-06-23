@@ -77,25 +77,42 @@ const MealdbDetails = () => {
                 </div>
                 <div className="col-8">
                     <ul className="list-group">
-                        <li className="list-group-item">{meals.strCategory}</li>
-                        <li className="list-group-item">{meals.strArea}</li>
-                        <li className="list-group-item">{meals.strInstructions}</li>
+                        <li className="list-group-item"><strong>Category:</strong> {meals.strCategory}</li>
+                        <li className="list-group-item"><strong>Area: </strong> {meals.strArea}</li>
+                        <li className="list-group-item"><strong>Meal Instructions: </strong> {meals.strInstructions}</li>
+                        {currentUser && (
+                            <div>
+                                <button className="btn btn-primary mt-2" onClick={handleLikeAlbum}>Like</button>
+                                {/*<button>Dislike</button>*/}
+                            </div>
+                        )}
                     </ul>
 
                 </div>
 
                 {meals && meals.strYoutube && (
-                    <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
+                    // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
+                    <iframe className="mt-3" height="500"
+                    src={getlink()}
+                    title="YouTube video player" frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen></iframe>
                 )}
 
-                <hr />
-                {currentUser && (
-                    <div>
-                        <button onClick={handleLikeAlbum}>Like</button>
-                        {/*<button>Dislike</button>*/}
-                    </div>
-                )}
-                <hr />
+                {/*<iframe width="560" height="315"*/}
+                {/*        src="https://www.youtube.com/embed/C3pAgB7pync"*/}
+                {/*        title="YouTube video player" frameBorder="0"*/}
+                {/*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
+                {/*        allowFullScreen></iframe>*/}
+
+                {/*<hr />*/}
+                {/*{currentUser && (*/}
+                {/*    <div>*/}
+                {/*        <button className="btn btn-primary" onClick={handleLikeAlbum}>Like</button>*/}
+                {/*        /!*<button>Dislike</button>*!/*/}
+                {/*    </div>*/}
+                {/*)}*/}
+                {/*<hr />*/}
 
                 {currentUser && (
                     <div>
@@ -103,7 +120,7 @@ const MealdbDetails = () => {
                         onChange={(e) => setReview(e.target.value)}
                         className="form-control mt-3"
                     ></textarea>
-                        <button className="btn btn-success" onClick={handlePostReviewBtn}>
+                        <button className="btn btn-success mt-1" onClick={handlePostReviewBtn}>
                             Post Review
                         </button>
                     </div>
@@ -123,6 +140,7 @@ const MealdbDetails = () => {
                 </ul>
             </div>
             <pre>{JSON.stringify(albumsIlike, null, 2)}</pre>
+            <pre>{JSON.stringify(currentUser, null, 2)}</pre>
             {/*<pre>{JSON.stringify(details, null, 2)}</pre>*/}
         </>
     );

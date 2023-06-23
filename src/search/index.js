@@ -23,15 +23,16 @@ function Search(){
         <div>
             <Nav/>
             <h1>Mealdb Search</h1>
-            <input className="form-control w-75 mb-2"
-                   onChange={(e) => {
-                     setQuery(e.target.value)
-                   }}
-                   value = {query}/>
-            <button className="btn btn-primary" onClick={() => {
+
+            <button className="btn btn-primary w-25 float-end" onClick={() => {
               navigate(`/search/${query}`)
                 //dispatch(findMealBySearchTermThunk(query))
             }}>Search</button>
+          <input className="form-control w-75 mb-2"
+                 onChange={(e) => {
+                   setQuery(e.target.value)
+                 }}
+                 value = {query}/>
             <ul className="list-group">
                 {
                     meals && meals.map((meal) =>
@@ -42,13 +43,13 @@ function Search(){
                                 {meal.strMeal}
                             </Link>
 
-                          <button className="btn btn-info float-end" onClick={() =>{
-                            dispatch(userLikesMealThunk({
-                              uid: 111, mid: meal.idMeal
-                            }))
-                          }}>
-                            Like
-                          </button>
+                          {/*<button className="btn btn-info float-end" onClick={() =>{*/}
+                          {/*  dispatch(userLikesMealThunk({*/}
+                          {/*    uid: 111, mid: meal.idMeal*/}
+                          {/*  }))*/}
+                          {/*}}>*/}
+                          {/*  Like*/}
+                          {/*</button>*/}
 
                         </li>
                     )
