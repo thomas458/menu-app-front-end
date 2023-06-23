@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {getRandomMealsThunk} from "../mealdb/mealdb-thunks";
 import {Provider, useDispatch, useSelector} from "react-redux";
 import {userLikesMealThunk} from "../likes/likes-thunks";
-import UserReviews from "../reviews/user-reviews";
+import ReviewList from "../reviews/review-list";
 
 function getRandomLetter() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -44,7 +44,7 @@ function Home() {
             <div className="col-6">
                 <pre>{JSON.stringify(currentUser)}</pre>
                 {
-                    currentUser && (<UserReviews/>)
+                    currentUser && (<ReviewList/>)
                 }
             </div>
         </div>

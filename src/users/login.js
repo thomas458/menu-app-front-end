@@ -35,7 +35,7 @@ const Login = () => {
                 // value={username}
                 onChange={(e) => setUsername(e.target.value)}/>
             <label for="password">Password</label>
-            <input id="password"
+            <input id="password" type="password"
                 className="form-control mb-2"
                 // value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
