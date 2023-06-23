@@ -6,6 +6,7 @@ import {Provider, useDispatch, useSelector} from "react-redux";
 import {userLikesMealThunk} from "../likes/likes-thunks";
 import ReviewList from "../reviews/review-list";
 import MealList from "./meal-list";
+import RecentReviews from "../reviews/recent-reviews";
 
 function getRandomLetter() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -42,10 +43,10 @@ function Home() {
                     }
                 </ul>
             </div>
-            <div className="col-4">
+            <div className="col-8">
                 <pre>Hello {currentUser && currentUser.username}</pre>
                 {
-                    currentUser && (<ReviewList/>)
+                    (currentUser && (<ReviewList/>)) || (!currentUser && <RecentReviews/>)
                 }
             </div>
             <div className="col-4">

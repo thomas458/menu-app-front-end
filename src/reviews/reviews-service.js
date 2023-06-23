@@ -23,4 +23,14 @@ export const deleteReview = async (rid) => {
     const response = await axios.delete(`${AUTHOR_REVIEWS_API}/${rid}`)
     return response.data
 }
+export const getFiveRecentReviews = async () => {
+    try {
+        const response = await axios.get(`${REVIEW_API}/recent`);
+        return response.data;
+    } catch (error) {
+        // Handle error
+        console.error(error);
+        throw error;
+    }
+};
 
