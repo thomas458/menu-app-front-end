@@ -3,6 +3,7 @@ import axios from "axios";
 const SEARCH_URL = 'https://themealdb.com/api/json/v1/1/search.php?s='
 const DETAIL_URL = 'https://themealdb.com/api/json/v1/1/lookup.php?i='
 const RANDOM_URL = 'https://themealdb.com/api/json/v1/1/search.php?f='
+const LOOKUP_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 
 export const findMealBySearchTerm = async (term) => {
     console.log(term)
@@ -18,5 +19,10 @@ export const findMealsByMealdbId = async (idMeal) => {
 
 export const getRandomMeals = async (letter) => {
     const response = await axios.get(`${RANDOM_URL}${letter}`)
+    return response.data
+}
+
+export const findMealsById = async (idMeal) => {
+    const response = await axios.get(`${LOOKUP_URL}${idMeal}`)
     return response.data
 }

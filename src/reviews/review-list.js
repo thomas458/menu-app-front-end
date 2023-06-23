@@ -3,27 +3,37 @@ import {useDispatch, useSelector} from "react-redux";
 import {findReviewsByAuthorThunk} from "./reviews-thunks";
 import ReviewItem from "./review-item";
 import reviewItem from "./review-item";
+import {findMealsById, findMealsByMealdbId} from "../mealdb/mealdb-service";
+import {findMealByMealIdThunk} from "../mealdb/mealdb-thunks";
+import {Link} from "react-router-dom";
+import {findAllMealsThunk} from "../meals/meals-thunks";
 
 
 const ReviewList = () => {
-    const {reviews, loading} = useSelector(state => state.reviews)
-    const {currentUser} = useSelector((state) => state.users)
+    const {reviews, loading} = useSelector(state => state.reviews);
+    const {currentUser} = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const {meals} = useSelector((state) => state.mealdb)
+
+
     useEffect(() => {
         dispatch(findReviewsByAuthorThunk(currentUser._id))
-    }, [])
+    }, []);
+
     return (
+
         <ul className="list-group">
-            {loading &&
-                <li className="list-group-item">
+            {loading && (
+                <ul className="list-group-item">
                     Loading...
-                </li>
-            }
-            {
-                reviews.map(review =>
-                    <ReviewItem
-                        key={review._id} review={review}/>)
-            }
+                </ul>
+            )}
+            <h2>your reviews</h2>
+            {reviews.map((review) => (
+                <ul key={review._id}>
+                    <ReviewItem key={review._id} review={review} />
+                </ul>
+            ))}
         </ul>
     );
 };

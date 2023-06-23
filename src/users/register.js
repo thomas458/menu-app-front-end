@@ -7,7 +7,7 @@ import {useNavigate} from "react-router";
 const Register = () => {
     const [username, setUsername] = useState('alice')
     const [password, setPassword] = useState('alice123')
-    const [type, setType] = useState('USER')
+    const [type, setType] = useState()
     const [validatePassword, setValidatePassword] = useState('alice123')
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
@@ -55,10 +55,9 @@ const Register = () => {
                 // value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
             <label>Choose your role</label>
-            <select className="form-select">
-                <option selected>User</option>
-                <option>Premium Member</option>
-                onChange={(e) => setType(e.target.value)}/>
+            <select className="form-select" onChange={(e) => setType(e.target.value)}>
+                <option>USER</option>
+                <option>PREMIUM</option>
             </select>
 
             <button
