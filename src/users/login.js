@@ -2,6 +2,7 @@ import {useState} from "react";
 import Nav from "../nav";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk, registerThunk} from "./users-thunk";
+import {useNavigate} from "react-router";
 
 const Login = () => {
     const[username, setUsername] = useState('alice')
@@ -10,10 +11,13 @@ const Login = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
-    const handleLoginBtn = () => {
+    const navigate = useNavigate()
+    const handleLoginBtn = async () => {
         setError(null)
         const loginUser = {username, password}
-        dispatch(loginThunk(loginUser))
+        await dispatch(loginThunk(loginUser))
+        navigate('/profile')
+
 
     }
     return(
@@ -40,10 +44,6 @@ const Login = () => {
                 className="btn btn-primary w-100">
                 Login
             </button>
-            {
-                currentUser &&
-                <h2>Welcome {currentUser.username}</h2>
-            }
         </>
     )
 }
