@@ -65,7 +65,13 @@ const MealdbDetails = () => {
         });
     };
 
+    // window.addEventListener('popstate', function(event) {
+    //     window.history.back();
+    // });
 
+    // document.getElementById('back-button').addEventListener('click', function() {
+    //     window.history.back();
+    // });
 
     return (
         <>
@@ -90,13 +96,20 @@ const MealdbDetails = () => {
 
                 </div>
 
+                {/*{meals && meals.strYoutube && (*/}
+                {/*    // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>*/}
+                {/*    <video className="mt-3" height="500"*/}
+                {/*    src={getlink()}*/}
+                {/*    title="YouTube video player" frameBorder="0"*/}
+                {/*    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
+                {/*    allowFullScreen></video>*/}
+                {/*)}*/}
+
                 {meals && meals.strYoutube && (
                     // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
-                    <iframe className="mt-3" height="500"
-                    src={getlink()}
-                    title="YouTube video player" frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen></iframe>
+                    <embed className="mt-3" height="500"
+                           src={getlink()}
+                           title="YouTube video player"></embed>
                 )}
 
                 {/*<iframe width="560" height="315"*/}
