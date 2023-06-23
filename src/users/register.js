@@ -17,7 +17,7 @@ const Register = () => {
             return
         }
         setError(null)
-        const newUser = {username, password}
+        const newUser = {username, password, type}
         dispatch(registerThunk(newUser))
 
         // if(currentUser){
@@ -36,21 +36,21 @@ const Register = () => {
                     {error}
                 </div>
             }
-            <label>Username</label>
-            <input
-                className="form-control mb-2"
+            <label for="username">Username</label>
+            <input id="username"
+                   className="form-control mb-2"
                 // value={username}
-                onChange={(e) => setUsername(e.target.value)}/>
-            <label>Password</label>
-            <input
-                className="form-control mb-2"
+                   onChange={(e) => setUsername(e.target.value)}/>
+            <label for="password">Password</label>
+            <input id="password" type="password"
+                   className="form-control mb-2"
                 // value={password}
-                onChange={(e) => setPassword(e.target.value)}/>
-            <label>Verify your password</label>
-            <input
-                className="form-control mb-2"
+                   onChange={(e) => setPassword(e.target.value)}/>
+            <label for="password2">Confirm password</label>
+            <input id="password2" type="password"
+                   className="form-control mb-2"
                 // value={validatePassword}
-                onChange={(e) => setValidatePassword(e.target.value)}/>
+                   onChange={(e) => setValidatePassword(e.target.value)}/>
             <label>Choose your role</label>
             <select className="form-select">
                 <option selected>User</option>
