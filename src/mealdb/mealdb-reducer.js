@@ -28,10 +28,10 @@ const mealdbReducer = createSlice({
             if(state.randomMeals === null  || state.randomMeals.length === 0){
                 state.randomMeals = action.payload.meals
             }
-        },
-        [getSingleRandomMealsThunk.fulfilled]: (state, action) =>{
-            state.singleMeal = action.payload
         }
+        // [getSingleRandomMealsThunk.fulfilled]: (state, action) =>{
+        //     state.singleMeal = action.payload
+        // }
     }
 })
 
