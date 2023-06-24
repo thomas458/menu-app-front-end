@@ -2,11 +2,6 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findReviewsByAuthorThunk, getFiveRecentReviewsThunk} from "./reviews-thunks";
 import ReviewItem from "./review-item";
-import reviewItem from "./review-item";
-import {findMealsById, findMealsByMealdbId} from "../mealdb/mealdb-service";
-import {findMealByMealIdThunk} from "../mealdb/mealdb-thunks";
-import {Link} from "react-router-dom";
-import {findAllMealsThunk} from "../meals/meals-thunks";
 
 
 const RecentReviews = () => {
@@ -29,7 +24,7 @@ const RecentReviews = () => {
             <h2>Recent reviews</h2>
             {reviews.map((review) => (
                 <ul key={review._id}>
-                    <ReviewItem key={review._id} review={review} />
+                    <ReviewItem key={review._id} review={review} idMeal={review.idMeal}/>
                 </ul>
             ))}
         </ul>
