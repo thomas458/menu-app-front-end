@@ -13,10 +13,10 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const navigate = useNavigate();
-    const handleLoginBtn = () => {
+    const handleLoginBtn = async () => {
         setError(null)
         const loginUser = {username, password}
-        dispatch(loginThunk(loginUser))
+        await dispatch(loginThunk(loginUser))
         navigate("/profile");
 
     }
