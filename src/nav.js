@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router";
+import {GiFallingLeaf} from "react-icons/gi";
 
 const Nav = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -8,38 +9,46 @@ const Nav = () => {
     const parts = pathname.split('/')
     console.log(parts)
     const screens = [
-        'search',
-        'meals'
+        'home', 'search'
     ]
     if(currentUser) {
         screens.push('profile')
         if(currentUser.type === "ADMIN"){
             screens.push('users')
         }
+        if(currentUser.type === "PREMIUM"){
+            screens.push('meals')
+        }
     }else{
         screens.push('login')
         screens.push('register')
     }
-    return(
-        <ul className="nav nav-pills">
-            <li className="nav-item">
-                <Link to="/"
-                      className={`nav-link ${parts[1] === ''?'active': ''}`}>
-                    Home
+    return (
+        <nav className="navbar navbar-expand-md navbar-toggler bg-light fixed-top">
+            <div className="container">
+                <Link className="navbar-brand" to="/">
+                    <GiFallingLeaf />
                 </Link>
-            </li>
-
-            {
-                screens.map((screen) =>
-                    <li className="nav-item">
-                        <Link to={`/${screen}`}
-                              className={`nav-link ${parts[1] === screen ?'active': ''}`}>
-                            <span className="text-capitalize">{screen}</span>
-                        </Link>
-                    </li>)
-            }
-        </ul>
-    )
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        {screens.map((screen) => (
+                            <li className="nav-item" key={screen}>
+                                <Link
+                                    to={`/${screen}`}
+                                    className={`nav-link ${
+                                        parts[1] === screen ? "active" : ""
+                                    }`}
+                                >
+                                    <span className="text-capitalize">{screen}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div>Hi {currentUser && currentUser.username}</div>
+            </div>
+        </nav>
+    );
 }
 
 export default Nav

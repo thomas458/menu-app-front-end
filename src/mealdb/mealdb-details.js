@@ -28,14 +28,9 @@ const MealdbDetails = () => {
         dispatch(findMealByMealIdThunk(idMeal))
         dispatch(findReviewsByMealThunk(idMeal))
     }, [])
-    const handlePostReviewBtn = () => {
-        dispatch(createReviewThunk({
-            review,
-            idMeal
-        }));
-        dispatch(findReviewsByMealThunk(idMeal));
-    }
+
     let title = "Meals";
+
     if (details && details.meals) {
         title = details.meals[0].strMeal
     }
@@ -45,6 +40,15 @@ const MealdbDetails = () => {
     }
     //console.log(details.meals[0].strMealThumb)
     //console.log("review", reviews)
+
+    const handlePostReviewBtn = async () => {
+        await dispatch(createReviewThunk({
+            review,
+            idMeal,
+            details
+        }));
+        await dispatch(findReviewsByMealThunk(idMeal));
+    }
 
     const getlink=()=> {
         let tmp = "";
@@ -106,7 +110,7 @@ const MealdbDetails = () => {
                 {/*    allowFullScreen></video>*/}
                 {/*)}*/}
 
-                {meals && meals.strYoutube && (
+                {currentUser&&currentUser.type==="PREMIUM"&&meals && meals.strYoutube && (
                     // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
                     <embed className="mt-3" height="500"
                            src={getlink()}
@@ -118,6 +122,7 @@ const MealdbDetails = () => {
                 {/*        title="YouTube video player" frameBorder="0"*/}
                 {/*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
                 {/*        allowFullScreen></iframe>*/}
+
 
                 {/*<hr />*/}
                 {/*{currentUser && (*/}

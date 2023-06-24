@@ -1,13 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit";
+
 import {
     findAllUsersThunk,
     registerThunk,
     loginThunk,
     profileThunk,
     logoutThunk,
-    findUserByIdThunk,
-    updateUserThunk
+
+    updateUserThunk,
+
+    deleteUserThunk,
+    findUserByIdThunk
 } from "./users-thunk";
+
 
 const usersReducer = createSlice({
     name: 'users',
@@ -50,11 +55,18 @@ const usersReducer = createSlice({
         [logoutThunk.fulfilled] : (state, action) => {
             state.currentUser = null
         },
+
         [updateUserThunk.fulfilled] : (state, action) => {
             state.currentUser = action.payload;
             state.loading = false;
             state.error = null;
-        }
+        },
+
+        [deleteUserThunk.fulfilled] :
+            (state, { payload }) => {
+                state.loading = false
+                state.tuits = state.users.filter(u => u._id !== payload)
+            },
     }
 })
 

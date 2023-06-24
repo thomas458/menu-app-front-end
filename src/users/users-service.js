@@ -35,6 +35,7 @@ export const logout = async () => {
     return response.data
 }
 
+
 export const deleteUser = async (uid) => {
     const response = await api.delete(`${USER_API_URL}/${uid}`)
     return response.data
@@ -48,3 +49,4 @@ export const findUserById = async (uid) => {
     const response = await api.get(`${USER_API_URL}/${uid}`)
     return response.data
 }
+
