@@ -6,34 +6,21 @@ import {findMealByMealIdThunk} from "../mealdb/mealdb-thunks";
 
 const ReviewItem = ({ review, idMeal }) => {
     const dispatch = useDispatch();
-    const {details} = useSelector((state) => state.mealdb)
-
-    // const deleteReviewHandler = (_id) => {
-    //     dispatch(deleteReviewThunk(_id));
-    // };
-
-    useEffect(() => {
-        dispatch(findMealByMealIdThunk(idMeal));
-    }, [dispatch, idMeal]);
-
-    const meal = details?.meals?.[0];
-    // const meal = details.meals[0];
-    console.log(details);
-    console.log(idMeal);
+    const meal = review.details?.meals?.[0];
 
     return (
         <li className="list-group-item">
             <div className="row">
                 {meal ? (
                     <>
-                        <div>{meal.strMeal}</div>
+                        <div>{meal?.strMeal}</div>
                         <div className="col-4">
                             <Link to={`/details/${meal.idMeal}`}>
                                 <img
                                     width={70}
                                     className="rounded float-left"
-                                    src={meal.strMealThumb}
-                                    alt={meal.strMeal}
+                                    src={meal?.strMealThumb}
+                                    alt={meal?.strMeal}
                                 />
                             </Link>
                         </div>
@@ -45,6 +32,7 @@ const ReviewItem = ({ review, idMeal }) => {
                 <div className="col-8">
                     <div>
                         <span>{review.review} </span>
+
                         {/*<RxCross2 onClick={() => deleteReviewHandler(review._id)} className="float-end"/>*/}
                     </div>
                     <br />
