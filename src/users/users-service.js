@@ -35,9 +35,15 @@ export const logout = async () => {
     return response.data
 }
 
-export const deleteUser = async (uid) => {}
-export const updateUser = async (uid, userUpdates) => {}
+
 
 export const findUserById = async (uid) => {
     const response = await api.post(`${USER_API_URL}/${uid}`)
 }
+
+export const deleteUser = async (uid) => {
+    const response = await axios.delete(`${BASE_URL}/users/${uid}`)
+    return response.data
+}
+export const updateUser = async (uid, userUpdates) => {}
+

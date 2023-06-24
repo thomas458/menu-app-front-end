@@ -1,12 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
+
 import {
     findAllUsersThunk,
     registerThunk,
     loginThunk,
     profileThunk,
     logoutThunk,
+    deleteUserThunk,
     findUserByIdThunk
 } from "./users-thunk";
+
 
 const usersReducer = createSlice({
     name: 'users',
@@ -48,7 +51,12 @@ const usersReducer = createSlice({
         },
         [logoutThunk.fulfilled] : (state, action) => {
             state.currentUser = null
-        }
+        },
+        [deleteUserThunk.fulfilled] :
+            (state, { payload }) => {
+                state.loading = false
+                state.tuits = state.users.filter(u => u._id !== payload)
+            },
     }
 })
 

@@ -14,7 +14,6 @@ const RecentReviews = () => {
     }, []);
 
     return (
-
         <ul className="list-group">
             {loading && (
                 <ul className="list-group-item">

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import Nav from "../nav";
-import { getRandomMealsThunk } from "../mealdb/mealdb-thunks";
+import {getRandomMealsThunk} from "../mealdb/mealdb-thunks";
 import ReviewList from "../reviews/review-list";
 import RecentReviews from "../reviews/recent-reviews";
 
@@ -13,8 +13,8 @@ function getRandomLetter() {
 }
 
 function Home() {
-    const { randomMeals, loading } = useSelector((state) => state.mealdb);
-    const { currentUser } = useSelector((state) => state.users);
+    const {randomMeals, loading} = useSelector((state) => state.mealdb);
+    const {currentUser} = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,11 +22,18 @@ function Home() {
     }, []);
 
     return (
-        <div className="container">
-            <Nav />
-            <header className="text-center my-5">
-                <h1 className="display-4">Welcome to Mealicious</h1>
-                <p className="lead">Discover delicious meals from around the world</p>
+        <div className="container mt-2 mb-2">
+            <Nav/>
+            <header className="banner text-center mt-2">
+                <img
+                    src="https://headwayhealth.com/wp-content/uploads/2018/07/AdobeStock_145208964.jpeg"
+                    alt="Delicious Meals Banner"
+                    className="banner-image img-responsive img-fluid"
+                />
+                <div className="banner-content">
+                    <h1 className="display-4">Welcome</h1>
+                    <p className="lead">Discover delicious meals from around the world</p>
+                </div>
             </header>
             <div className="row">
                 <div className="col-lg-8">
@@ -36,28 +43,23 @@ function Home() {
                             randomMeals.map((meal) => (
                                 <div key={meal.idMeal} className="col-md-6 mb-4">
                                     <div className="card h-100">
-                                        <img
-                                            src={meal.strMealThumb}
-                                            alt={meal.strMeal}
-                                            className="card-img-top"
-                                        />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{meal.strMeal}</h5>
-                                            <Link
-                                                to={`/details/${meal.idMeal}`}
-                                                className="btn btn-primary"
-                                            >
-                                                View Details
-                                            </Link>
-                                        </div>
+                                        <Link to={`/details/${meal.idMeal}`} className="link-underline-light">
+                                            <img
+                                                src={meal.strMealThumb}
+                                                alt={meal.strMeal}
+                                                className="card-img-top"
+                                            />
+                                            <div className="card-body">
+                                                <h5 className="card-title">{meal.strMeal}</h5>
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                             ))}
                     </div>
                 </div>
                 <div className="col-lg-4">
-                    <h2 className="mb-4">Reviews</h2>
-                    {currentUser ? <ReviewList /> : <RecentReviews />}
+                    {currentUser ? <ReviewList/> : <RecentReviews/>}
                 </div>
             </div>
         </div>
