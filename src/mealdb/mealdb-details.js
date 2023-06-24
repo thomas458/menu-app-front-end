@@ -28,12 +28,12 @@ const MealdbDetails = () => {
         dispatch(findMealByMealIdThunk(idMeal))
         dispatch(findReviewsByMealThunk(idMeal))
     }, [])
-    const handlePostReviewBtn = () => {
-        dispatch(createReviewThunk({
+    const handlePostReviewBtn = async () => {
+        await dispatch(createReviewThunk({
             review,
             idMeal
         }));
-        dispatch(findReviewsByMealThunk(idMeal));
+        await dispatch(findReviewsByMealThunk(idMeal));
     }
     let title = "Meals";
     if (details && details.meals) {
