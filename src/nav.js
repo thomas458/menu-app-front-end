@@ -8,13 +8,15 @@ const Nav = () => {
     const parts = pathname.split('/')
     console.log(parts)
     const screens = [
-        'search',
-        'meals'
+        'search'
     ]
     if(currentUser) {
         screens.push('profile')
         if(currentUser.type === "ADMIN"){
             screens.push('users')
+        }
+        if(currentUser.type === "PREMIUM"){
+            screens.push('meals')
         }
     }else{
         screens.push('login')

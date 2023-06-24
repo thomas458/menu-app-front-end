@@ -1,5 +1,11 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {findMealBySearchTerm, findMealsById, findMealsByMealdbId, getRandomMeals} from "./mealdb-service";
+import {
+    findMealBySearchTerm,
+    findMealsById,
+    findMealsByMealdbId,
+    getRandomMeals,
+    getSingleRandomMeal
+} from "./mealdb-service";
 
 export const findMealBySearchTermThunk = createAsyncThunk(
     'findMealBySearchTerm',
@@ -14,4 +20,9 @@ export const findMealByMealIdThunk = createAsyncThunk(
 export const getRandomMealsThunk = createAsyncThunk(
     'randomMeal',
     (letter) => getRandomMeals(letter)
+)
+
+export const getSingleRandomMealsThunk = createAsyncThunk(
+    'singleRandomMeal',
+    () => getSingleRandomMeal()
 )

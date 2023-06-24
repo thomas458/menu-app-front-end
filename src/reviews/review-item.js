@@ -1,7 +1,9 @@
-import React from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {RxCross2} from "react-icons/rx";
 import {deleteReviewThunk} from "./reviews-thunks";
+import {findMealByMealIdThunk} from "../mealdb/mealdb-thunks";
+import {Link} from "react-router-dom";
 
 
 const ReviewItem = (
@@ -17,30 +19,51 @@ const ReviewItem = (
         mealName
     }
 ) => {
+    const idMeal = review.idMeal;
     const dispatch = useDispatch();
+    const {details} = useSelector((state) => state.mealdb)
     const deleteReviewHandler = (_id) => {
         dispatch(deleteReviewThunk(_id));
     }
-    console.log(review);
+    useEffect(() => {
+        dispatch(findMealByMealIdThunk(idMeal));
+    }, []);
+
+    // const meal = details && details.length > 0 ? details.meals[0] : null;
+    // // console.log(details);
+    // console.log(meal);
     return (
         <>
-            {/*<pre>{JSON.stringify(review, null, 2)}</pre>*/}
-        <li className="list-group-item">
-            <div className="row">
-                <div className="col-2">
-                    {/*<img width={70} className="rounded-circle float-end rounded-3" src={`/images/${tuit.image}`}/>*/}
-                </div>
+            {/*<pre>{JSON.stringify(details, null, 2)}</pre>*/}
+            <li className="list-group-item">
+                <div className="row">
+                    {details && details.meals ? (
+                        <>
+                            <div>{details.meals[0].strMeal}</div>
+                            <div className="col-4">
+                                <Link to={`/details/${details.meals[0].idMeal}`}>
+                                    <img
+                                        width={70}
+                                        className="rounded float-left"
+                                        src={details.meals[0].strMealThumb}
+                                        alt={details.meals[0].strMeal}
+                                    />
+                                </Link>
+                            </div>
+                        </>
+                    ) : (
+                        <div>Loading meal...</div>
+                    )}
 
-                <div className="col-10">
-                    <div>
-                        <span>{review.review} </span>
-                        <span>{review.idMeal}</span>
-                        {/*<RxCross2 onClick={() => deleteReviewHandler(review._id)} className="float-end"/>*/}
+                    <div className="col-8">
+                        <div>
+                            <span>{review.review} </span>
+                            {/*<RxCross2 onClick={() => deleteReviewHandler(review._id)} className="float-end"/>*/}
+                        </div>
+                        <br/>
                     </div>
-                    <br/>
                 </div>
-            </div>
-        </li>
+            </li>
         </>
     );
 };

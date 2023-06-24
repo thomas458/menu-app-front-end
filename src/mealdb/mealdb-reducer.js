@@ -3,14 +3,15 @@ import {
     findMealByIdThunk,
     findMealByMealIdThunk,
     findMealBySearchTermThunk,
-    getRandomMealsThunk
+    getRandomMealsThunk, getSingleRandomMealsThunk
 } from "./mealdb-thunks";
 
 const initialState = {
     meals: [],
     loading: false,
     details: {},
-    randomMeals: []
+    randomMeals: [],
+    meal:[]
 }
 
 const mealdbReducer = createSlice({
@@ -27,6 +28,9 @@ const mealdbReducer = createSlice({
             if(state.randomMeals === null  || state.randomMeals.length === 0){
                 state.randomMeals = action.payload.meals
             }
+        },
+        [getSingleRandomMealsThunk.fulfilled]: (state, action) =>{
+            state.singleMeal = action.payload
         }
     }
 })
