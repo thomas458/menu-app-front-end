@@ -24,7 +24,7 @@ const Nav = () => {
         screens.push('register')
     }
     return (
-        <nav className="navbar navbar-expand-md navbar-toggler bg-light fixed-top">
+        <nav className="navbar navbar-expand-md navbar-toggler bg-light">
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <GiFallingLeaf />
