@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router";
+import {GiFallingLeaf} from "react-icons/gi";
 
 const Nav = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -22,26 +23,32 @@ const Nav = () => {
         screens.push('login')
         screens.push('register')
     }
-    return(
-        <ul className="nav nav-pills">
-            {/*<li className="nav-item">*/}
-            {/*    <Link to="/"*/}
-            {/*          className={`nav-link ${parts[1] === ''?'active': ''}`}>*/}
-            {/*        Home*/}
-            {/*    </Link>*/}
-            {/*</li>*/}
-
-            {
-                screens.map((screen) =>
-                    <li className="nav-item">
-                        <Link to={`/${screen}`}
-                              className={`nav-link ${parts[1] === screen ?'active': ''}`}>
-                            <span className="text-capitalize">{screen}</span>
-                        </Link>
-                    </li>)
-            }
-        </ul>
-    )
+    return (
+        <nav className="navbar navbar-expand-md navbar-toggler bg-light fixed-top">
+            <div className="container">
+                <Link className="navbar-brand" to="/">
+                    <GiFallingLeaf />
+                </Link>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        {screens.map((screen) => (
+                            <li className="nav-item" key={screen}>
+                                <Link
+                                    to={`/${screen}`}
+                                    className={`nav-link ${
+                                        parts[1] === screen ? "active" : ""
+                                    }`}
+                                >
+                                    <span className="text-capitalize">{screen}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div>Hi {currentUser && currentUser.username}</div>
+            </div>
+        </nav>
+    );
 }
 
 export default Nav

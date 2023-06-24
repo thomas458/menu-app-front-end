@@ -19,12 +19,14 @@ const UserList = () => {
     const deleteUserHandler = (id) => {
         dispatch(deleteUserThunk(id));
     }
+    const usersExceptAdmin = users.filter((user) => user.username !== "admin");
+
     return (
         <>
             <Nav />
-            <h1>Users {users.length}</h1>
+            <h1>Users {usersExceptAdmin.length}</h1>
             <ul className="list-group">
-                {users.map((user) => (
+                {usersExceptAdmin.map((user) => (
                     <li className="list-group-item" key={user._id}>
                         {user.username}
                         <button

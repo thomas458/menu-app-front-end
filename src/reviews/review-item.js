@@ -14,7 +14,7 @@ const ReviewItem = ({ review, idMeal }) => {
 
     useEffect(() => {
         dispatch(findMealByMealIdThunk(idMeal));
-    }, []);
+    }, [dispatch, idMeal]);
 
     const meal = details?.meals?.[0];
     // const meal = details.meals[0];
