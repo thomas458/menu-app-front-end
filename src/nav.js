@@ -8,7 +8,7 @@ const Nav = () => {
     const parts = pathname.split('/')
     console.log(parts)
     const screens = [
-        'search'
+        'home', 'search'
     ]
     if(currentUser) {
         screens.push('profile')
@@ -24,12 +24,12 @@ const Nav = () => {
     }
     return(
         <ul className="nav nav-pills">
-            <li className="nav-item">
-                <Link to="/"
-                      className={`nav-link ${parts[1] === ''?'active': ''}`}>
-                    Home
-                </Link>
-            </li>
+            {/*<li className="nav-item">*/}
+            {/*    <Link to="/"*/}
+            {/*          className={`nav-link ${parts[1] === ''?'active': ''}`}>*/}
+            {/*        Home*/}
+            {/*    </Link>*/}
+            {/*</li>*/}
 
             {
                 screens.map((screen) =>

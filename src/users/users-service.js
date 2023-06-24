@@ -34,5 +34,8 @@ export const logout = async () => {
     return response.data
 }
 
-export const deleteUser = async (uid) => {}
+export const deleteUser = async (uid) => {
+    const response = await axios.delete(`${BASE_URL}/users/${uid}`)
+    return response.data
+}
 export const updateUser = async (uid, userUpdates) => {}
