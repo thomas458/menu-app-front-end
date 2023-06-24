@@ -150,9 +150,11 @@ const MealdbDetails = () => {
 
                             <li className="list-group-item">
                                 {review.review}
-                                <Link to={`/profile/${review.author._id}`} className="float-end">
+                                {
+                                    review.author&&review.author._id&&<Link to={`/profile/${review.author._id}`} className="float-end">
                                     {review.author.username}
                                 </Link>
+                                }
 
                             </li>
                         ))}
