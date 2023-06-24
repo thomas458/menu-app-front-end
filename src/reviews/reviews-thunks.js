@@ -3,7 +3,7 @@ import {
     createReview,
     deleteReview,
     findReviewsByAuthor,
-    findReviewsByMeal
+    findReviewsByMeal, getFiveRecentReviews
 } from "./reviews-service";
 
 export const createReviewThunk = createAsyncThunk(
@@ -27,3 +27,7 @@ export const deleteReviewThunk = createAsyncThunk(
         await deleteReview(_id)
         return _id
     })
+export const getFiveRecentReviewsThunk = createAsyncThunk(
+    'getFiveRecentReviewsThunk',
+    async (review) => getFiveRecentReviews()
+)
