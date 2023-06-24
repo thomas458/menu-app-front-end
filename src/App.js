@@ -18,6 +18,8 @@ import Register from "./users/register";
 import CurrentUser from "./users/current-user";
 import MealdbDetails from "./mealdb/mealdb-details";
 import reviewsReducer from "./reviews/reviews-reducer";
+import PublicProfile from "./users/public-profile";
+import followsReducer from "./follows/follows-reducer";
 
 const store = configureStore({
     reducer: {
@@ -25,7 +27,8 @@ const store = configureStore({
         mealdb: mealdbReducer,
         likes: likesReducer,
         users: usersReducer,
-        reviews: reviewsReducer
+        reviews: reviewsReducer,
+        follows: followsReducer
     }
 })
 
@@ -40,11 +43,12 @@ function App() {
                           <Route path= "/"          element={<Navigate to="/home"/>}/>
                           <Route path= "/home/*"    element={<Home/>}/>
                           <Route path= "/login/*"    element={<Login/>}/>
-                          <Route path= "/profile/*" element={
+                          <Route path= "/profile" element={
                               <ProtectedRoute>
                                   <Profile/>
                               </ProtectedRoute>
                           }/>
+                          <Route path="/profile/:uid" element={<PublicProfile/>}/>
                           <Route path= "/search/" element={<Search/>}/>
                           <Route path="/search/:searchTerm" element={<Search />} />
                           <Route path= "/meals/*" element={<Meals/>}/>

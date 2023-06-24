@@ -26,7 +26,7 @@ export const login = async(user) => {
 }
 
 export const profile = async () => {
-    const response = await api.post(`${BASE_URL}/profile`)
+    const response = await api.get(`${BASE_URL}/profile`)
     return response.data
 }
 
@@ -36,14 +36,17 @@ export const logout = async () => {
 }
 
 
-
-export const findUserById = async (uid) => {
-    const response = await api.post(`${USER_API_URL}/${uid}`)
-}
-
 export const deleteUser = async (uid) => {
-    const response = await axios.delete(`${BASE_URL}/users/${uid}`)
+    const response = await api.delete(`${USER_API_URL}/${uid}`)
     return response.data
 }
-export const updateUser = async (uid, userUpdates) => {}
+export const updateUser = async (uid, user) => {
+    const response = await api.put(`${USER_API_URL}/${uid}`, user)
+    return response.data;
+}
+
+export const findUserById = async (uid) => {
+    const response = await api.get(`${USER_API_URL}/${uid}`)
+    return response.data
+}
 

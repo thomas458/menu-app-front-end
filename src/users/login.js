@@ -11,6 +11,7 @@ const Login = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+
     const navigate = useNavigate();
     const handleLoginBtn = () => {
         setError(null)
@@ -44,10 +45,6 @@ const Login = () => {
                 className="btn btn-primary w-100">
                 Login
             </button>
-            {
-                currentUser &&
-                <h2>Welcome {currentUser.username}</h2>
-            }
         </>
     )
 }
