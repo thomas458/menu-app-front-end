@@ -28,14 +28,9 @@ const MealdbDetails = () => {
         dispatch(findMealByMealIdThunk(idMeal))
         dispatch(findReviewsByMealThunk(idMeal))
     }, [])
-    const handlePostReviewBtn = async () => {
-        await dispatch(createReviewThunk({
-            review,
-            idMeal
-        }));
-        await dispatch(findReviewsByMealThunk(idMeal));
-    }
+
     let title = "Meals";
+
     if (details && details.meals) {
         title = details.meals[0].strMeal
     }
@@ -45,6 +40,15 @@ const MealdbDetails = () => {
     }
     //console.log(details.meals[0].strMealThumb)
     //console.log("review", reviews)
+
+    const handlePostReviewBtn = async () => {
+        await dispatch(createReviewThunk({
+            review,
+            idMeal,
+            details
+        }));
+        await dispatch(findReviewsByMealThunk(idMeal));
+    }
 
     const getlink=()=> {
         let tmp = "";
