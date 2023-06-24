@@ -1,14 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
 import Nav from "../nav";
-import {logoutThunk, profileThunk, updateThunk, updateUserThunk} from "./users-thunk";
+import {logoutThunk, profileThunk, updateUserThunk} from "./users-thunk";
+import {findReviewsByLoginUserThunk} from "../reviews/reviews-thunks"
 import {useNavigate} from "react-router";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
     const [profile, setProfile] = useState(currentUser)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {userReviews} = useSelector((state) => state.reviews);
     const handleLogout = () => {
         dispatch(logoutThunk())
         navigate('/login')
@@ -25,6 +28,7 @@ const Profile = () => {
         const fetchProfile = async () => {
             try{
                 const {payload} = await dispatch(profileThunk());
+                await dispatch(findReviewsByLoginUserThunk(payload._id))
                 setProfile(payload);
                 console.log("payload", payload)
             }catch(error) {
@@ -44,6 +48,17 @@ const Profile = () => {
             {
                 currentUser && <h2>Welcome {currentUser.username}</h2>
             }
+            <ul>
+                {
+                    userReviews && userReviews.map((review) =>
+                        <li>
+                            <Link to={`/details/${review.idMeal}`}>
+                            {review.review} {review.idMeal}
+                            </Link>
+                        </li>
+                    )
+                }
+            </ul>
             <label>Username</label>
             <input
                 className="form-control"

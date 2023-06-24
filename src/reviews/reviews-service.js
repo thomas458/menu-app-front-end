@@ -34,3 +34,8 @@ export const getFiveRecentReviews = async () => {
     }
 };
 
+export const findReviewsByLoginUser = async (author) => {
+    const response = await api.get(`${AUTHOR_REVIEWS_API}/${author}/reviews`)
+    return response.data
+}
+
