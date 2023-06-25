@@ -93,7 +93,7 @@ const MealdbDetails = () => {
                         <li className="list-group-item"><strong>Meal Instructions: </strong> {meals.strInstructions}</li>
                         {currentUser && (
                             <div>
-                                <button className="btn btn-primary mt-2" onClick={handleLikeAlbum}>Like</button>
+                                <button className="btn btn-primary mt-2" onClick={handleLikeAlbum}>Bookmark</button>
                                 {/*<button>Dislike</button>*/}
                             </div>
                         )}

@@ -9,6 +9,7 @@ import {
   findFollowersThunk,
   findFollowingThunk
 } from "../follows/follows-thunks";
+import * as service from "../likes/likes-service";
 
 const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -16,6 +17,13 @@ const Profile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {userReviews} = useSelector((state) => state.reviews);
+
+  const [albumsIlike, setAlbumsIlike] = useState([]);
+  const fetchMyLikes = async () => {
+    const albums = await service.findAlbumsILike();
+    setAlbumsIlike(albums);
+  };
+
   const {followers, following} = useSelector((state) => state.follows);
     const handleLogout = () => {
         dispatch(logoutThunk())
@@ -30,6 +38,7 @@ const Profile = () => {
         }
     }
     useEffect(() => {
+      fetchMyLikes();
         const fetchProfile = async () => {
             try{
                 const {payload} = await dispatch(profileThunk());
@@ -119,6 +128,8 @@ const Profile = () => {
                 )
             }
           </div>
+
+          <pre>{JSON.stringify(albumsIlike, null, 2)}</pre>
 
         </>
     )
