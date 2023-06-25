@@ -7,7 +7,7 @@ import Users from "./users/index"
 import ProtectedRoute from "./users/protected-route"
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
-import { Navigate } from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import mealsReducer from "./meals/meals-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import mealdbReducer from "./mealdb/mealdb-reducer";
@@ -33,34 +33,35 @@ const store = configureStore({
 })
 
 function App() {
-  return (
-      <BrowserRouter>
-        <div className="container">
+    return (
+        <BrowserRouter>
+            <div className="container">
 
-            <Provider store ={store}>
-                <CurrentUser>
-                      <Routes>
-                          <Route path= "/"          element={<Navigate to="/home"/>}/>
-                          <Route path= "/home/*"    element={<Home/>}/>
-                          <Route path= "/login/*"    element={<Login/>}/>
-                          <Route path= "/profile" element={<Profile/>
-                              // <ProtectedRoute>
-                              //     <Profile/>
-                              // </ProtectedRoute>
-                          }/>
-                          <Route path="/profile/:uid" element={<PublicProfile/>}/>
-                          <Route path= "/search/" element={<Search/>}/>
-                          <Route path="/search/:searchTerm" element={<Search />} />
-                          <Route path= "/meals/*" element={<Meals/>}/>
-                          <Route path= "/users/*" element={<Users/>}/>
-                          <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
-                          <Route path= "/register" element={<Register/>}/>
-                      </Routes>
-                </CurrentUser>
-            </Provider>
+                <Provider store={store}>
+                    <CurrentUser>
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/home"/>}/>
+                            <Route path="/home/*" element={<Home/>}/>
+                            <Route path="/login/*" element={<Login/>}/>
+                            <Route path="/profile" element={
+                                <ProtectedRoute>
+                                    <Profile/>
+                                </ProtectedRoute>
+                            }/>
+                            <Route path="/profile/:uid" element={<PublicProfile/>}/>
+                            <Route path="/search/" element={<Search/>}/>
+                            <Route path="/search/:searchTerm" element={<Search/>}/>
+                            <Route path="/meals/*" element={<Meals/>}/>
+                            <Route path="/users/*" element={<Users/>}/>
+                            <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
+                            <Route path="/register" element={<Register/>}/>
+                        </Routes>
+                    </CurrentUser>
+                </Provider>
 
-        </div>
-      </BrowserRouter>
-  );
+            </div>
+        </BrowserRouter>
+    );
 }
+
 export default App;
