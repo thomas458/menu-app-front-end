@@ -5,6 +5,10 @@ import {findReviewsByLoginUserThunk} from "../reviews/reviews-thunks"
 import {useNavigate} from "react-router";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {
+  findFollowersThunk,
+  findFollowingThunk
+} from "../follows/follows-thunks";
 
 const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -12,6 +16,7 @@ const Profile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {userReviews} = useSelector((state) => state.reviews);
+  const {followers, following} = useSelector((state) => state.follows);
     const handleLogout = () => {
         dispatch(logoutThunk())
         navigate('/login')
@@ -30,6 +35,8 @@ const Profile = () => {
                 const {payload} = await dispatch(profileThunk());
                 await dispatch(findReviewsByLoginUserThunk(payload._id))
                 setProfile(payload);
+              dispatch(findFollowersThunk(currentUser._id))
+              dispatch(findFollowingThunk(currentUser._id))
                 console.log("payload", payload)
             }catch(error) {
                 console.log("login")
@@ -88,6 +95,31 @@ const Profile = () => {
             <button className="btn btn-danger" onClick={handleLogout}>
                 Logout
             </button>
+
+          <h2>Following</h2>
+          <div className="list-group">
+            {
+                following && following.map((follow) =>
+                    <Link to={`/profile/${follow.followed._id}`} className="list-group-item">
+                      {follow.followed.username}
+
+                    </Link>
+                )
+            }
+          </div>
+
+          <h2>Followers</h2>
+          <div className="list-group">
+            {
+                followers && followers.map((follow) =>
+                    <Link to={`/profile/${follow.follower._id}`} className="list-group-item">
+                      {follow.follower.username}
+
+                    </Link>
+                )
+            }
+          </div>
+
         </>
     )
 }
