@@ -17,7 +17,9 @@ const Profile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {userReviews} = useSelector((state) => state.reviews);
-
+    const lastpage = () => {
+        navigate(-1);
+    };
   const [albumsIlike, setAlbumsIlike] = useState([]);
   const fetchMyLikes = async () => {
     const albums = await service.findAlbumsILike();
@@ -58,52 +60,58 @@ const Profile = () => {
     },[]);
 
     return(
-        <>
+        <div className="container-fluid">
             <Nav/>
-            <h1>Profile</h1>
+            <button className="btn btn-primary" onClick={lastpage}>Back</button>
+            <button className="btn btn-danger float-end" onClick={handleLogout}>
+                Logout
+            </button>
             {
                 currentUser && <h2>Welcome {currentUser.username}</h2>
             }
-            <ul>
-                {
-                    userReviews && userReviews.map((review) =>
-                        <li>
-                            <Link to={`/details/${review.idMeal}`}>
-                            {review.review} {review.idMeal}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-            <label>Username</label>
+            <label className="mt-2 mb-1">Username</label>
             <input
                 className="form-control"
                 value={profile.username}
                 readOnly
             />
-            <label>Password</label>
+            <label for="text-field-passwword" className="mt-2 mb-1">Password</label>
             <input
+                id="text-field-passwword"
                 className="form-control"
                 value={profile.password}
                 type="password"
+                placeholder = "password"
                 onChange={(e) => setProfile({...profile, password: e.target.value})}
             />
-            <label>First Name</label>
+            <label for="text-fields-firstName" className="mt-2 mb-1">First Name</label>
             <input
+                id = "text-fields-firstName"
+                placeholder="first name"
                 className="form-control"
                 value={profile.firstName}
                 onChange={(e) => setProfile({...profile, firstName: e.target.value})}
             />
-            <label>Last Name</label>
+            <label for="text-fields-lastName" className="mt-2 mb-1">Last Name</label>
             <input
+                id = "text-fields-lastName"
+                placeholder = "last name"
                 className="form-control"
                 value={profile.lastName}
                 onChange={(e) => setProfile({...profile, lastName: e.target.value})}
             />
-            <button onClick={handleUpdate} className="btn btn-primary">Update</button>
-            <button className="btn btn-danger" onClick={handleLogout}>
-                Logout
-            </button>
+            <button onClick={handleUpdate} className="btn btn-success mt-2 mb-2">Update</button>
+
+            <h2>My Reviews</h2>
+            <div className="list-group bg-info">
+                {
+                    userReviews && userReviews.map((review) =>
+                        <Link to={`/details/${review.idMeal}`} className="list-group-item">
+                            {review.review}
+                        </Link>
+                    )
+                }
+            </div>
 
           <h2>Following</h2>
           <div className="list-group">
@@ -128,10 +136,19 @@ const Profile = () => {
                 )
             }
           </div>
+        <h2>Bookmarks</h2>
 
-          <pre>{JSON.stringify(albumsIlike, null, 2)}</pre>
+            <div className="list-group">
+                {
+                  albumsIlike.map((album) =>
+                    <Link to={`/details/${album.albumId}`} className = "list-group-item">
+                        {album.name}
+                    </Link>
+                    )
+                }
+            </div>
 
-        </>
+        </div>
     )
 }
 
