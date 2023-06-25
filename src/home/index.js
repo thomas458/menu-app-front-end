@@ -31,8 +31,13 @@ function Home() {
                     className="banner-image img-responsive img-fluid"
                 />
                 <div className="banner-content">
-                    <h1 className="display-4">Welcome</h1>
-                    <p className="lead">Discover delicious meals from around the world</p>
+                    <div className="jumbotron">
+                        <h1 className="display-4">Welcome!</h1>
+                        <p className="lead">Discover delicious meals from around the world</p>
+                        <p>Search for your favorite meals, explore new recipes, and share your meal reviews with
+                            others.</p>
+                        <hr className="my-4"/>
+                    </div>
                 </div>
             </header>
             <div className="row">
@@ -43,7 +48,8 @@ function Home() {
                             randomMeals.map((meal) => (
                                 <div key={meal.idMeal} className="col-md-6 mb-4">
                                     <div className="card h-100">
-                                        <Link to={`/details/${meal.idMeal}`} className="link-underline-light">
+                                        <Link to={`/details/${meal.idMeal}`}
+                                              className="link-underline-light text-center text-black">
                                             <img
                                                 src={meal.strMealThumb}
                                                 alt={meal.strMeal}
@@ -58,7 +64,7 @@ function Home() {
                             ))}
                     </div>
                 </div>
-                <div className="col-lg-4">
+                <div className="col-lg-4 mb-4">
                     {currentUser ? <ReviewList/> : <RecentReviews/>}
                 </div>
             </div>

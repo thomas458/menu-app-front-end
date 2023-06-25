@@ -43,10 +43,10 @@ function App() {
                           <Route path= "/"          element={<Navigate to="/home"/>}/>
                           <Route path= "/home/*"    element={<Home/>}/>
                           <Route path= "/login/*"    element={<Login/>}/>
-                          <Route path= "/profile" element={
-                              <ProtectedRoute>
-                                  <Profile/>
-                              </ProtectedRoute>
+                          <Route path= "/profile" element={<Profile/>
+                              // <ProtectedRoute>
+                              //     <Profile/>
+                              // </ProtectedRoute>
                           }/>
                           <Route path="/profile/:uid" element={<PublicProfile/>}/>
                           <Route path= "/search/" element={<Search/>}/>

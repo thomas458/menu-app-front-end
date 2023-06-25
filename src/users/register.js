@@ -3,35 +3,46 @@ import Nav from "../nav";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
 import {useNavigate} from "react-router";
+import {Navigate} from "react-router-dom";
 
 const Register = () => {
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice123')
-    const [type, setType] = useState()
-    const [validatePassword, setValidatePassword] = useState('alice123')
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [type, setType] = useState('USER')
+    const [validatePassword, setValidatePassword] = useState()
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const handleRegisterBtn = () => {
+    const handleRegisterBtn = async () => {
         if (password !== validatePassword) {
             setError('Passwords must match')
             return
         }
+        if (!username || !password || !validatePassword) {
+            setError("Please fill in all fields");
+            return;
+        }
         setError(null)
         const newUser = {username, password, type}
-        dispatch(registerThunk(newUser))
-        navigate("/profile");
+
+        try {
+            await dispatch(registerThunk(newUser));
+            navigate("/profile");
+            console.log(username, password, type);
+        } catch (e) {
+            alert(e);
+        }
+
 
         // if(currentUser){
-        //     return(<Navigate to {'/profile'}/>)
+        //     return(<Navigate to {...'/profile'}/>)
         // }
 
     }
     return (
         <>
             <Nav/>
-            {/*<h1>Register</h1>*/}
             <h1>Create an account</h1>
             {
                 error &&
@@ -39,30 +50,30 @@ const Register = () => {
                     {error}
                 </div>
             }
-            <label for="username">Username</label>
-            <input id="username"
+            <label htmlFor="username">Username</label>
+            <input id="username" placeholder="Enter your username"
                    className="form-control mb-2"
-                // value={username}
+                   value={username}
                    onChange={(e) => setUsername(e.target.value)}/>
-            <label for="password">Password</label>
-            <input id="password" type="password"
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" placeholder="Enter your password"
                    className="form-control mb-2"
-                // value={password}
+                value={password}
                    onChange={(e) => setPassword(e.target.value)}/>
-            <label for="password2">Confirm password</label>
-            <input id="password2" type="password"
+            <label htmlFor="password2">Confirm password</label>
+            <input id="password2" type="password" placeholder="Confirm your password"
                    className="form-control mb-2"
-                // value={validatePassword}
+                value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
-            <label>Choose your role</label>
-            <select className="form-select" onChange={(e) => setType(e.target.value)}>
-                <option>USER</option>
-                <option>PREMIUM</option>
+            <label htmlFor="role">Choose your role</label>
+            <select id="role" className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
+                <option value="USER">USER</option>
+                <option value="PREMIUM">PREMIUM</option>
             </select>
 
             <button
                 onClick={handleRegisterBtn}
-                className="btn btn-primary w-100 mt-3">
+                className="btn btn-outline-success w-100 mt-3">
                 Register
             </button>
         </>

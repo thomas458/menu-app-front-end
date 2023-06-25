@@ -5,25 +5,31 @@ import {loginThunk, registerThunk} from "./users-thunk";
 import {useNavigate} from "react-router";
 
 const Login = () => {
-    const[username, setUsername] = useState('alice')
-    const[password, setPassword] = useState('alice123')
-    const[validatePassword, setValidatePassword] = useState('alice123')
+    const[username, setUsername] = useState("")
+    const[password, setPassword] = useState("")
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
-
     const navigate = useNavigate();
     const handleLoginBtn = async () => {
+        if (username === "" || password === "") {
+            setError("Please fill in all fields");
+            return;
+        }
         setError(null)
         const loginUser = {username, password}
-        await dispatch(loginThunk(loginUser))
-        navigate("/profile");
+        try {
+            await dispatch(loginThunk(loginUser));
+            navigate("/profile");
+        } catch (e) {
+            alert(e);
+        }
 
     }
     return(
         <>
             <Nav/>
-            <h1>Login</h1>
+            <h1 className="text-start">Login</h1>
             {
                 error &&
                 <div className="alert alert-danger">
@@ -31,18 +37,18 @@ const Login = () => {
                 </div>
             }
             <label for="username">Username</label>
-            <input id="username"
-                className="form-control mb-2"
-                // value={username}
+            <input id="username" placeholder="Enter your username"
+                className="form-control mb-2 mt-2"
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}/>
             <label for="password">Password</label>
-            <input id="password" type="password"
-                className="form-control mb-2"
-                // value={password}
+            <input id="password" type="password" placeholder="Enter your password"
+                className="form-control mb-2 mt-2"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             <button
                 onClick={handleLoginBtn}
-                className="btn btn-primary w-100">
+                className="btn btn-outline-success w-100 mt-2">
                 Login
             </button>
         </>

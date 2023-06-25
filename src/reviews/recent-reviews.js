@@ -20,7 +20,7 @@ const RecentReviews = () => {
                     Loading...
                 </ul>
             )}
-            <h2>Recent reviews</h2>
+            <h2 className="ms-5">Recent reviews</h2>
             {reviews.map((review) => (
                 <ul key={review._id}>
                     <ReviewItem key={review._id} review={review} idMeal={review.idMeal}/>
