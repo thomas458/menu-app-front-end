@@ -51,7 +51,7 @@ function App() {
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                             <Route path="/search/" element={<Search/>}/>
                             <Route path="/search/:searchTerm" element={<Search/>}/>
-                            <Route path="/meals/*" element={<Meals/>}/>
+                            <Route path="/request/*" element={<Meals/>}/>
                             <Route path="/users/*" element={<Users/>}/>
                             <Route path="/details/:idMeal" element={<MealdbDetails/>}/>
                             <Route path="/register" element={<Register/>}/>
