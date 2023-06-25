@@ -16,8 +16,8 @@ const Nav = () => {
         if(currentUser.type === "ADMIN"){
             screens.push('users')
         }
-        if(currentUser.type === "PREMIUM"){
-            screens.push('meals')
+        if(currentUser.type === "PREMIUM"||currentUser.type === "ADMIN"){
+            screens.push('request')
         }
     }else{
         screens.push('login')

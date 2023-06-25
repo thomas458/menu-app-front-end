@@ -9,7 +9,7 @@ import {profileThunk} from "../users/users-thunk";
 const Meals = () => {
     const {currentUser} = useSelector((state) => state.users)
     const {meals} = useSelector((state) => state.meals)
-    const [meal, setMeal] = useState({name: 'New Meal'})
+    const [meal, setMeal] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findAllMealsThunk())
@@ -19,38 +19,41 @@ const Meals = () => {
     return (
         <>
             <Nav/>
-            <h1>Meals</h1>
-            {
-                currentUser &&
-                <h2>Welcome {currentUser.username}</h2>
-            }
+            <h1>New Meal Request</h1>
+            {/*{*/}
+            {/*    currentUser &&*/}
+            {/*    <h2>Welcome {currentUser.username}</h2>*/}
+            {/*}*/}
             <ul className="list-group">
                 <li className="list-group-item">
-                    <input className="form-control w-50"
-                        onChange={(e) =>
-                    setMeal({...meal, name:e.target.value})}
-                        value={meal.name}/>
-                    <button className="btn btn-primary" onClick={() => {
+                    <button className="btn btn-primary float-end w-25" onClick={() => {
                         console.log("onClick")
                         dispatch(createMealsThunk(
                             {
-                                name: meal.name
+                                name: meal.name,
+                                usr:currentUser._id
                             }
                         ))
+                        setMeal({ name: "" });
                     }}>Create</button>
+                    <input className="form-control w-75"
+                           placeholder="Enter meal name"
+                           onChange={(e) =>
+                               setMeal({...meal, name:e.target.value})}
+                           value={meal.name}/>
                 </li>
                 {
                     meals.map((meal) =>
-                    <li className="list-group-item" key={meal._id}>
+                    {if((currentUser.type==="ADMIN"||currentUser._id===meal.usr))return(<li className="list-group-item" key={meal._id}>
 
-                        <button className="btn btn-success float-end" onClick={()=>{
-                            dispatch(userLikesMealThunk({uid: 111, mid: meal._id}))
-                        }}>
-                            Like
-                        </button>
-                        <button className="btn btn-info float-end">
-                            Dislike
-                        </button>
+                        {/*<button className="btn btn-success float-end" onClick={()=>{*/}
+                        {/*    dispatch(userLikesMealThunk({uid: 111, mid: meal._id}))*/}
+                        {/*}}>*/}
+                        {/*    Like*/}
+                        {/*</button>*/}
+                        {/*<button className="btn btn-info float-end">*/}
+                        {/*    Dislike*/}
+                        {/*</button>*/}
 
                         <button className="btn btn-danger float-end" onClick={() => {
                             dispatch(deleteMealsThunk(meal._id))
@@ -59,7 +62,7 @@ const Meals = () => {
                             Delete
                         </button>
                         {meal.name}
-                    </li>)
+                    </li>)})
                 }
             </ul>
         </>
