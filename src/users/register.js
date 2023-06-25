@@ -8,7 +8,7 @@ import {Navigate} from "react-router-dom";
 const Register = () => {
     const [username, setUsername] = useState('alice')
     const [password, setPassword] = useState('alice123')
-    const [type, setType] = useState()
+    const [type, setType] = useState('USER')
     const [validatePassword, setValidatePassword] = useState('alice123')
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
@@ -25,9 +25,10 @@ const Register = () => {
         try {
             await dispatch(registerThunk(newUser));
             navigate("/profile");
-        } catch (error) {
-            setError(error.message);
+        } catch (e) {
+            alert(e);
         }
+
 
         // if(currentUser){
         //     return(<Navigate to {...'/profile'}/>)
@@ -37,7 +38,6 @@ const Register = () => {
     return (
         <>
             <Nav/>
-            {/*<h1>Register</h1>*/}
             <h1>Create an account</h1>
             {
                 error &&
@@ -61,9 +61,9 @@ const Register = () => {
                 // value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
             <label>Choose your role</label>
-            <select className="form-select" onChange={(e) => setType(e.target.value)}>
-                <option selected>USER</option>
-                <option>PREMIUM</option>
+            <select className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
+                <option value="USER">USER</option>
+                <option value="PREMIUM">PREMIUM</option>
             </select>
 
             <button
