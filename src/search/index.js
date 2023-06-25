@@ -6,6 +6,7 @@ import {userLikesMealThunk} from "../likes/likes-thunks";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import * as service from "../likes/likes-service";
 import {AiFillHeart} from "react-icons/ai";
+import {BsFillBookmarkFill} from "react-icons/bs";
 
 function Search(){
   const { searchTerm } = useParams();
@@ -58,7 +59,7 @@ function Search(){
                                 {meal.strMeal}
                             </Link>
 
-                          {isMemberExists(meal.idMeal)?<AiFillHeart className="text-danger"/>:""}
+                          {isMemberExists(meal.idMeal)?<BsFillBookmarkFill className="text-danger"/>:""}
 
                           {/*<button className="btn btn-info float-end" onClick={() =>{*/}
                           {/*  dispatch(userLikesMealThunk({*/}
