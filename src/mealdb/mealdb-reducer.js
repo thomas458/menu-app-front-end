@@ -18,8 +18,13 @@ const mealdbReducer = createSlice({
     name: 'mealdb',
     initialState,
     extraReducers: {
+        [findMealBySearchTermThunk.pending]: (state, action) =>{
+            state.meals = action.payload
+            state.loading=true
+        },
         [findMealBySearchTermThunk.fulfilled]: (state, action) =>{
             state.meals = action.payload
+            state.loading=false
         },
         [findMealByMealIdThunk.fulfilled]: (state, action) =>{
             state.details = action.payload

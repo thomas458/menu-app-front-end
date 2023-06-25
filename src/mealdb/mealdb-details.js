@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {findMealByMealIdThunk} from "./mealdb-thunks";
 import {useEffect, useState} from "react";
@@ -70,17 +70,15 @@ const MealdbDetails = () => {
         });
     };
 
-    // window.addEventListener('popstate', function(event) {
-    //     window.history.back();
-    // });
-
-    // document.getElementById('back-button').addEventListener('click', function() {
-    //     window.history.back();
-    // });
+    const navigate = useNavigate();
+    const lastpage = () => {
+        navigate(-1);
+    };
 
     return (
         <>
             <Nav/>
+            <button className="btn btn-primary mt-1" onClick={lastpage}>Back</button>
             <h1>{title}</h1>
             <div className="row">
                 <div className="col-4">
@@ -101,14 +99,6 @@ const MealdbDetails = () => {
 
                 </div>
 
-                {/*{meals && meals.strYoutube && (*/}
-                {/*    // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>*/}
-                {/*    <video className="mt-3" height="500"*/}
-                {/*    src={getlink()}*/}
-                {/*    title="YouTube video player" frameBorder="0"*/}
-                {/*    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
-                {/*    allowFullScreen></video>*/}
-                {/*)}*/}
 
                 {currentUser&&currentUser.type==="PREMIUM"&&meals && meals.strYoutube && (
                     // <iframe className="mt-3" height="500" src={getlink()} frameBorder="0" allowFullScreen></iframe>
@@ -117,26 +107,12 @@ const MealdbDetails = () => {
                            title="YouTube video player"></embed>
                 )}
 
-                {/*<iframe width="560" height="315"*/}
-                {/*        src="https://www.youtube.com/embed/C3pAgB7pync"*/}
-                {/*        title="YouTube video player" frameBorder="0"*/}
-                {/*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
-                {/*        allowFullScreen></iframe>*/}
-
-
-                {/*<hr />*/}
-                {/*{currentUser && (*/}
-                {/*    <div>*/}
-                {/*        <button className="btn btn-primary" onClick={handleLikeAlbum}>Like</button>*/}
-                {/*        /!*<button>Dislike</button>*!/*/}
-                {/*    </div>*/}
-                {/*)}*/}
-                {/*<hr />*/}
 
                 {currentUser && (
                     <div>
                     <textarea
                         onChange={(e) => setReview(e.target.value)}
+                        placeholder="Enter review"
                         className="form-control mt-3"
                     ></textarea>
                         <button className="btn btn-success mt-1" onClick={handlePostReviewBtn}>
@@ -160,8 +136,6 @@ const MealdbDetails = () => {
                         ))}
                 </ul>
             </div>
-            {/*<pre>{JSON.stringify(albumsIlike, null, 2)}</pre>*/}
-            {/*<pre>{JSON.stringify(currentUser, null, 2)}</pre>*/}
             {/*<pre>{JSON.stringify(details, null, 2)}</pre>*/}
         </>
     );

@@ -8,6 +8,7 @@ import * as service from "../likes/likes-service";
 import {AiFillHeart} from "react-icons/ai";
 import {BsFillBookmarkFill} from "react-icons/bs";
 
+
 function Search(){
   const { searchTerm } = useParams();
     //const [searchTerm, setSearchTerm] = useState('Cake')
@@ -18,26 +19,44 @@ function Search(){
     const albums = await service.findAlbumsILike();
     setAlbumsIlike(albums);
   };
+  const{meals, loading} = useSelector((state) => state.mealdb)
+  const dispatch = useDispatch()
 
   const targetProperty = "albumId";
-// 使用`some()`方法进行判断
+
   const isMemberExists =(str) => albumsIlike.some(function (member) {
     return member[targetProperty] === str;
   });
   useEffect(() => {
     fetchMyLikes();
-    if (searchTerm) {
-      setQuery(searchTerm);
-      dispatch(findMealBySearchTermThunk(query))
-      setQuery("");
-    }
+    const getfood = async () => {
+      try {
+        if (searchTerm) {
+          setQuery(searchTerm);
+          await dispatch(findMealBySearchTermThunk(query));
+          setQuery("");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getfood();
   }, [searchTerm]);
-    const{meals, loading} = useSelector((state) => state.mealdb)
-    const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    if (!loading &&(!meals||meals.length === 0)) {
+      navigate("/search");
+    }
+  }, [meals, loading]);
+
+
 
     return(
         <div>
             <Nav/>
+
             <h1>Mealdb Search</h1>
 
             <button className="btn btn-primary w-25 float-end" onClick={() => {
@@ -45,31 +64,26 @@ function Search(){
                 //dispatch(findMealBySearchTermThunk(query))
             }}>Search</button>
           <input className="form-control w-75 mb-2"
+                 placeholder="Enter food name"
                  onChange={(e) => {
                    setQuery(e.target.value)
                  }}
                  value = {query}/>
             <ul className="list-group">
                 {
-                    meals && meals.map((meal) =>
+                    searchTerm&&meals && meals.map((meal) =>
+                        <Link to={`/details/${meal.idMeal}`} style={{ textDecoration: 'none' }} className="no-underline">
                         <li key={meal.idMeal} className="list-group-item">
+
                           <img src={meal.strMealThumb} style={{ width: '80px', height: '60px' }} />
 
-                            <Link to={`/details/${meal.idMeal}`} className="m-2">
-                                {meal.strMeal}
-                            </Link>
+                                <span className="ms-2"> {meal.strMeal}</span>
 
-                          {isMemberExists(meal.idMeal)?<BsFillBookmarkFill className="text-danger"/>:""}
-
-                          {/*<button className="btn btn-info float-end" onClick={() =>{*/}
-                          {/*  dispatch(userLikesMealThunk({*/}
-                          {/*    uid: 111, mid: meal.idMeal*/}
-                          {/*  }))*/}
-                          {/*}}>*/}
-                          {/*  Like*/}
-                          {/*</button>*/}
+                          {isMemberExists(meal.idMeal)?<BsFillBookmarkFill className="text-danger ms-1"/>:""}
 
                         </li>
+                        </Link>
+
                     )
                 }
             </ul>
