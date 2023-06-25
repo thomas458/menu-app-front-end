@@ -53,17 +53,17 @@ const Register = () => {
             <label htmlFor="username">Username</label>
             <input id="username" placeholder="Enter your username"
                    className="form-control mb-2"
-                // value={username}
+                   value={username}
                    onChange={(e) => setUsername(e.target.value)}/>
             <label htmlFor="password">Password</label>
             <input id="password" type="password" placeholder="Enter your password"
                    className="form-control mb-2"
-                // value={password}
+                value={password}
                    onChange={(e) => setPassword(e.target.value)}/>
             <label htmlFor="password2">Confirm password</label>
             <input id="password2" type="password" placeholder="Confirm your password"
                    className="form-control mb-2"
-                // value={validatePassword}
+                value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
             <label htmlFor="role">Choose your role</label>
             <select id="role" className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
@@ -73,7 +73,7 @@ const Register = () => {
 
             <button
                 onClick={handleRegisterBtn}
-                className="btn btn-primary w-100 mt-3">
+                className="btn btn-outline-success w-100 mt-3">
                 Register
             </button>
         </>

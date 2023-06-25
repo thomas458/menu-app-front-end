@@ -20,13 +20,13 @@ const ReviewList = () => {
 
     return (
         <div>
-            <h2>Your Reviews</h2>
+            <h2 className="ms-5">Your Reviews</h2>
             {loading ? (
                 <div>Loading reviews...</div>
             ) : (
                 <ul className="list-group">
                     {reviews.map((review) => (
-                        <ReviewItem key={review._id} review={review} idMeal={review.idMeal} />
+                        <ReviewItem key={review._id} review={review} idMeal={review.idMeal}/>
                     ))}
                 </ul>
             )}

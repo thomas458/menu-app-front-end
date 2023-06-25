@@ -24,7 +24,7 @@ const Nav = () => {
         screens.push('register')
     }
     return (
-        <nav className="navbar navbar-expand-md navbar-toggler bg-light">
+        <nav className="navbar navbar-expand-md navbar-toggler bg-light mt-4 mb-4">
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <GiFallingLeaf />
@@ -32,7 +32,7 @@ const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         {screens.map((screen) => (
-                            <li className="nav-item" key={screen}>
+                            <li className="nav-item " key={screen}>
                                 <Link
                                     to={`/${screen}`}
                                     className={`nav-link ${
@@ -45,26 +45,10 @@ const Nav = () => {
                         ))}
                     </ul>
                 </div>
-                <div>Hi {currentUser && currentUser.username}</div>
+                <div className="navbar-text">Hi {currentUser && currentUser.username}</div>
             </div>
         </nav>
     );
 }
 
 export default Nav
-// function Nav() {
-//     const{currentUser} = useSelector((state) => state.currentUser)
-//     return (
-//         <nav className="nav nav-tabs mb-2">
-//             <Link className="nav-link" to="/home">Home</Link>
-//             <Link className="nav-link" to="/search">Search</Link>
-//             <Link className="nav-link" to="/users">Users</Link>
-//             <Link className="nav-link" to="/register">Register</Link>
-//             <Link className="nav-link" to="/login">Login</Link>
-//             <Link className="nav-link" to="/details">Details</Link>
-//             <Link className="nav-link" to="/profile">Profile</Link>
-//             <Link className="nav-link" to="/meals">Meals</Link>
-//         </nav>
-//     );
-// }
-// export default Nav;

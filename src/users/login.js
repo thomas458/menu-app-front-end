@@ -29,7 +29,7 @@ const Login = () => {
     return(
         <>
             <Nav/>
-            <h1>Login</h1>
+            <h1 className="text-start">Login</h1>
             {
                 error &&
                 <div className="alert alert-danger">
@@ -38,17 +38,17 @@ const Login = () => {
             }
             <label for="username">Username</label>
             <input id="username" placeholder="Enter your username"
-                className="form-control mb-2"
+                className="form-control mb-2 mt-2"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}/>
             <label for="password">Password</label>
             <input id="password" type="password" placeholder="Enter your password"
-                className="form-control mb-2"
+                className="form-control mb-2 mt-2"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             <button
                 onClick={handleLoginBtn}
-                className="btn btn-primary w-100">
+                className="btn btn-outline-success w-100 mt-2">
                 Login
             </button>
         </>
