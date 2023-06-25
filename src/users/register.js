@@ -28,7 +28,9 @@ const Register = () => {
 
         try {
             await dispatch(registerThunk(newUser));
-            navigate("/profile");
+            if (currentUser)
+                navigate("/profile");
+            else {alert("User already exists!")};
             console.log(username, password, type);
         } catch (e) {
             alert(e);
