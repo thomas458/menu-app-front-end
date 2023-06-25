@@ -30,7 +30,10 @@ const Register = () => {
             await dispatch(registerThunk(newUser));
             if (currentUser)
                 navigate("/profile");
-            else {alert("User already exists!")};
+            else {
+                alert("User already exists!")
+            }
+            ;
             console.log(username, password, type);
         } catch (e) {
             alert(e);
@@ -60,12 +63,12 @@ const Register = () => {
             <label htmlFor="password">Password</label>
             <input id="password" type="password" placeholder="Enter your password"
                    className="form-control mb-2"
-                value={password}
+                   value={password}
                    onChange={(e) => setPassword(e.target.value)}/>
             <label htmlFor="password2">Confirm password</label>
             <input id="password2" type="password" placeholder="Confirm your password"
                    className="form-control mb-2"
-                value={validatePassword}
+                   value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
             <label htmlFor="role">Choose your role</label>
             <select id="role" className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
