@@ -35,13 +35,12 @@ const PublicProfile = () => {
                 Follow
             </button>
             <h1>{publicProfile && publicProfile.username}</h1>
-            <ul>
+            <ul className="list-group">
                 {
                     reviews && reviews.map((review) =>
-                    <li>
-                        <Link to={`/details/${review.idMeal}`}/>
-                            {review.review} {review.idMeal}
-                    </li>
+                    <Link to={`/details/${review.idMeal}`} className = "list-group-item">
+                        {review.review} {review.idMeal}
+                    </Link>
                     )
                 }
             </ul>
