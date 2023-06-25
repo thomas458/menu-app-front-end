@@ -13,6 +13,7 @@ import * as service from "../likes/likes-service";
 
 const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
+    console.log(currentUser)
     const [profile, setProfile] = useState(currentUser)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -72,14 +73,14 @@ const Profile = () => {
             <label className="mt-2 mb-1">Username</label>
             <input
                 className="form-control"
-                value={profile.username}
+                value={profile ? profile.username : ""}
                 readOnly
             />
             <label for="text-field-passwword" className="mt-2 mb-1">Password</label>
             <input
                 id="text-field-passwword"
                 className="form-control"
-                value={profile.password}
+                value={profile ? profile.password : ""}
                 type="password"
                 placeholder = "password"
                 onChange={(e) => setProfile({...profile, password: e.target.value})}
@@ -89,7 +90,7 @@ const Profile = () => {
                 id = "text-fields-firstName"
                 placeholder="first name"
                 className="form-control"
-                value={profile.firstName}
+                value={profile ? profile.firstName : ""}
                 onChange={(e) => setProfile({...profile, firstName: e.target.value})}
             />
             <label for="text-fields-lastName" className="mt-2 mb-1">Last Name</label>
@@ -97,7 +98,7 @@ const Profile = () => {
                 id = "text-fields-lastName"
                 placeholder = "last name"
                 className="form-control"
-                value={profile.lastName}
+                value={profile ? profile.lastName : ""}
                 onChange={(e) => setProfile({...profile, lastName: e.target.value})}
             />
             <button onClick={handleUpdate} className="btn btn-success mt-2 mb-2">Update</button>
@@ -118,8 +119,7 @@ const Profile = () => {
             {
                 following && following.map((follow) =>
                     <Link to={`/profile/${follow.followed._id}`} className="list-group-item">
-                      {follow.followed.username}
-
+                        {follow.followed.username  ?? ""}
                     </Link>
                 )
             }
@@ -130,7 +130,7 @@ const Profile = () => {
             {
                 followers && followers.map((follow) =>
                     <Link to={`/profile/${follow.follower._id}`} className="list-group-item">
-                      {follow.follower.username}
+                      {follow.follower.username  ?? ""}
 
                     </Link>
                 )

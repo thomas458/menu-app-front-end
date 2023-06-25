@@ -20,7 +20,12 @@ const Login = () => {
         const loginUser = {username, password}
         try {
             await dispatch(loginThunk(loginUser));
-            navigate("/profile");
+            if (currentUser)
+                navigate("/profile");
+            else {
+                alert("Incorrect password");
+            }
+            ;
         } catch (e) {
             alert(e);
         }
