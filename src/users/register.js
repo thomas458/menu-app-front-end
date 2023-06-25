@@ -3,6 +3,7 @@ import Nav from "../nav";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
 import {useNavigate} from "react-router";
+import {Navigate} from "react-router-dom";
 
 const Register = () => {
     const [username, setUsername] = useState('alice')
@@ -13,18 +14,23 @@ const Register = () => {
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const handleRegisterBtn = () => {
+    const handleRegisterBtn = async () => {
         if (password !== validatePassword) {
             setError('Passwords must match')
             return
         }
         setError(null)
         const newUser = {username, password, type}
-        dispatch(registerThunk(newUser))
-        navigate("/profile");
+
+        try {
+            await dispatch(registerThunk(newUser));
+            navigate("/profile");
+        } catch (error) {
+            setError(error.message);
+        }
 
         // if(currentUser){
-        //     return(<Navigate to {'/profile'}/>)
+        //     return(<Navigate to {...'/profile'}/>)
         // }
 
     }
@@ -40,23 +46,23 @@ const Register = () => {
                 </div>
             }
             <label for="username">Username</label>
-            <input id="username"
+            <input id="username" placeholder="Enter your username"
                    className="form-control mb-2"
                 // value={username}
                    onChange={(e) => setUsername(e.target.value)}/>
             <label for="password">Password</label>
-            <input id="password" type="password"
+            <input id="password" type="password" placeholder="Enter your password"
                    className="form-control mb-2"
                 // value={password}
                    onChange={(e) => setPassword(e.target.value)}/>
             <label for="password2">Confirm password</label>
-            <input id="password2" type="password"
+            <input id="password2" type="password" placeholder="Confirm your password"
                    className="form-control mb-2"
                 // value={validatePassword}
                    onChange={(e) => setValidatePassword(e.target.value)}/>
             <label>Choose your role</label>
             <select className="form-select" onChange={(e) => setType(e.target.value)}>
-                <option>USER</option>
+                <option selected>USER</option>
                 <option>PREMIUM</option>
             </select>
 
