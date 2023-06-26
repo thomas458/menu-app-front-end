@@ -45,11 +45,11 @@ function Search(){
   }, [searchTerm]);
 
 
-  useEffect(() => {
-    if (!loading &&(!meals||meals.length === 0)) {
-      navigate("/search");
-    }
-  }, [meals, loading]);
+  // useEffect(() => {
+  //   if (!loading &&(!meals||meals.length === 0)) {
+  //     navigate("/search");
+  //   }
+  // }, [meals, loading]);
 
 
 
@@ -63,7 +63,8 @@ function Search(){
               navigate(`/search/${query}`)
                 //dispatch(findMealBySearchTermThunk(query))
             }}>Search</button>
-          <input className="form-control w-75 mb-2"
+          <input className="form-control mb-2"
+                 style={{ width: '73%' }}
                  placeholder="Enter food name"
                  onChange={(e) => {
                    setQuery(e.target.value)
