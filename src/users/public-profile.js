@@ -39,7 +39,7 @@ const PublicProfile = () => {
                 {
                     reviews && reviews.map((review) =>
                     <Link to={`/details/${review.idMeal}`} className = "list-group-item">
-                        {review.review} {review.idMeal}
+                        {review.review}
                     </Link>
                     )
                 }
