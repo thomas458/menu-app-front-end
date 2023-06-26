@@ -1,9 +1,9 @@
 import axios from "axios";
-// const BASE_URL = process.env.BASE_URL||'http://localhost:4000'
-// const USER_API_URL =process.env.USER_API_URL||'http://localhost:4000/users';
+const BASE_URL = process.env.BASE_URL||'http://localhost:4000'
+const USER_API_URL =process.env.USER_API_URL||'http://localhost:4000/users';
 
-const BASE_URL = process.env.BASE_URL
-const USER_API_URL =process.env.USER_API_URL
+// const BASE_URL = process.env.BASE_URL
+// const USER_API_URL =process.env.USER_API_URL
 
 const api = axios.create({ withCredentials: true });
 

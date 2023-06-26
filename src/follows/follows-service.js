@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// const FOLLOWS_API = process.env.FOLLOWS_API||'http://localhost:4000/follows'
-// const USERS_API = process.env.USERS_API||'http://localhost:4000/users'
+const FOLLOWS_API = process.env.FOLLOWS_API||'http://localhost:4000/follows'
+const USERS_API = process.env.USERS_API||'http://localhost:4000/users'
 
-const FOLLOWS_API = process.env.FOLLOWS_API
-const USERS_API = process.env.USERS_API
+// const FOLLOWS_API = process.env.FOLLOWS_API
+// const USERS_API = process.env.USERS_API
 
 const api = axios.create({withCredentials: true});
 

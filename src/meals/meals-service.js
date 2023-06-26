@@ -1,7 +1,7 @@
 import axios from "axios";
-//const Meal_API_URL = process.env.Meal_API_URL||'http://localhost:4000/meals'
+const Meal_API_URL = process.env.Meal_API_URL||'http://localhost:4000/meals'
 
-const Meal_API_URL = process.env.Meal_API_URL
+// const Meal_API_URL = process.env.Meal_API_URL
 
 export const createMeal = async (newMeal) => {
     const response = await axios.post(Meal_API_URL, newMeal)
