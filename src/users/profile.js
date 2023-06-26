@@ -85,18 +85,18 @@ const Profile = () => {
                 placeholder = "password"
                 onChange={(e) => setProfile({...profile, password: e.target.value})}
             />
-            <label for="text-fields-firstName" className="mt-2 mb-1">First Name</label>
+            <label for="text-fields-firstName" className="mt-2 mb-1">Email</label>
             <input
                 id = "text-fields-firstName"
-                placeholder="first name"
+                placeholder="Email"
                 className="form-control"
                 value={profile ? profile.firstName : ""}
                 onChange={(e) => setProfile({...profile, firstName: e.target.value})}
             />
-            <label for="text-fields-lastName" className="mt-2 mb-1">Last Name</label>
+            <label for="text-fields-lastName" className="mt-2 mb-1">Phone</label>
             <input
                 id = "text-fields-lastName"
-                placeholder = "last name"
+                placeholder = "Phone"
                 className="form-control"
                 value={profile ? profile.lastName : ""}
                 onChange={(e) => setProfile({...profile, lastName: e.target.value})}
