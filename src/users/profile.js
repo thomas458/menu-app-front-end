@@ -1,7 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import Nav from "../nav";
 import {logoutThunk, profileThunk, updateUserThunk} from "./users-thunk";
-import {findReviewsByLoginUserThunk} from "../reviews/reviews-thunks"
+import {
+  deleteReviewThunk,
+  findReviewsByLoginUserThunk
+} from "../reviews/reviews-thunks"
 import {useNavigate} from "react-router";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
@@ -15,6 +18,7 @@ const Profile = () => {
     const {currentUser} = useSelector((state) => state.users)
     console.log(currentUser)
     const [profile, setProfile] = useState(currentUser)
+  const [del, setDel] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {userReviews} = useSelector((state) => state.reviews);
@@ -28,8 +32,8 @@ const Profile = () => {
   };
 
   const {followers, following} = useSelector((state) => state.follows);
-    const handleLogout = () => {
-        dispatch(logoutThunk())
+    const handleLogout = async () => {
+        await dispatch(logoutThunk())
         navigate('/login')
     }
     const handleUpdate = async () => {
@@ -40,6 +44,16 @@ const Profile = () => {
             console.error(error);
         }
     }
+
+  const handledelete = async (rid) => {
+    try {
+      await dispatch(deleteReviewThunk(rid));
+      setDel(!del);
+    }catch (error){
+      console.error(error);
+    }
+  }
+
     useEffect(() => {
       fetchMyLikes();
         const fetchProfile = async () => {
@@ -58,7 +72,7 @@ const Profile = () => {
 
         };
         fetchProfile();
-    },[]);
+    },[del]);
 
     return(
         <div className="container-fluid">
@@ -105,13 +119,21 @@ const Profile = () => {
 
             <h2>My Reviews</h2>
             <div className="list-group bg-info">
-                {
+
+              <ul className="list-group">
+              {
                     userReviews && userReviews.map((review) =>
-                        <Link to={`/details/${review.idMeal}`} className="list-group-item">
+                    <li className="list-group-item">
+                      <button onClick={()=>handledelete(review._id)} className="btn btn-danger float-end">delete</button>
+                        <Link to={`/details/${review.idMeal}`} className="list-group-item w-75">
                             {review.review}
                         </Link>
+
+                    </li>
+
                     )
                 }
+              </ul>
             </div>
 
           <h2>Following</h2>
