@@ -4,10 +4,15 @@ const request = axios.create({
     withCredentials: true,
 });
 
-const USERS_URL = process.env.USERS_URL||'http://localhost:4000/users'
+// const USERS_URL = process.env.USERS_URL||'http://localhost:4000/users'
+// const LIKES_URL = 'http://localhost:4000/users/:uid/likes/:mid'
+// const ALBUM_URL=process.env.ALBUM_URL||"http://localhost:4000/api/albums/albumId"
+// const ALBUM_Like=process.env.ALBUM_Like||"http://localhost:4000/api/albums/i/like"
+
+const USERS_URL = process.env.USERS_URL
 const LIKES_URL = 'http://localhost:4000/users/:uid/likes/:mid'
-const ALBUM_URL=process.env.ALBUM_URL||"http://localhost:4000/api/albums/albumId"
-const ALBUM_Like=process.env.ALBUM_Like||"http://localhost:4000/api/albums/i/like"
+const ALBUM_URL=process.env.ALBUM_URL
+const ALBUM_Like=process.env.ALBUM_Like
 
 export const userLikesMeal = async (uid, mid) => {
     const response = await axios.post(`${USERS_URL}/${uid}/likes/${mid}`)

@@ -1,7 +1,11 @@
 import axios from "axios";
-const REVIEW_API = process.env.REVIEW_API||"http://localhost:4000/api/reviews"
-const MEAL_REVIEWS_API = process.env.MEAL_REVIEWS_API||"http://localhost:4000/api/meals"
-const AUTHOR_REVIEWS_API = process.env.AUTHOR_REVIEWS_API||"http://localhost:4000/api/users"
+// const REVIEW_API = process.env.REVIEW_API||"http://localhost:4000/api/reviews"
+// const MEAL_REVIEWS_API = process.env.MEAL_REVIEWS_API||"http://localhost:4000/api/meals"
+// const AUTHOR_REVIEWS_API = process.env.AUTHOR_REVIEWS_API||"http://localhost:4000/api/users"
+
+const REVIEW_API = process.env.REVIEW_API
+const MEAL_REVIEWS_API = process.env.MEAL_REVIEWS_API
+const AUTHOR_REVIEWS_API = process.env.AUTHOR_REVIEWS_API
 
 const api = axios.create({withCredentials: true});
 
