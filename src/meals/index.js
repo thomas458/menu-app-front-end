@@ -36,7 +36,8 @@ const Meals = () => {
                         ))
                         setMeal({ name: "" });
                     }}>Create</button>
-                    <input className="form-control w-75"
+                    <input className="form-control"
+                           style={{ width: '73%' }}
                            placeholder="Enter meal name"
                            onChange={(e) =>
                                setMeal({...meal, name:e.target.value})}
