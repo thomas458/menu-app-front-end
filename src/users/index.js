@@ -15,7 +15,7 @@ const UserList = () => {
     useEffect(() => {
         //findAllUsers()
         dispatch(findAllUsersThunk())
-    }, [])
+    }, [users])
     const deleteUserHandler = (id) => {
         dispatch(deleteUserThunk(id));
     }

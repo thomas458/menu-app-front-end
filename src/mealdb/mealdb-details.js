@@ -47,6 +47,7 @@ const MealdbDetails = () => {
             idMeal,
             details
         }));
+        setReview("");
         await dispatch(findReviewsByMealThunk(idMeal));
     }
 
@@ -114,6 +115,7 @@ const MealdbDetails = () => {
                         onChange={(e) => setReview(e.target.value)}
                         placeholder="Enter review"
                         className="form-control mt-3"
+                        value = {review}
                     ></textarea>
                         <button className="btn btn-success mt-1" onClick={handlePostReviewBtn}>
                             Post Review
