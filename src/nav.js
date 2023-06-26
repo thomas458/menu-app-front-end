@@ -29,7 +29,7 @@ const Nav = () => {
                 <Link className="navbar-brand" to="/">
                     <GiFallingLeaf />
                 </Link>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         {screens.map((screen) => (
                             <li className="nav-item " key={screen}>
