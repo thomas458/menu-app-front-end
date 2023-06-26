@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Nav from "../nav";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "./users-thunk";
+import {loginThunk, registerThunk} from "./users-thunk";
 import {useNavigate} from "react-router";
 import {Navigate} from "react-router-dom";
 
@@ -27,13 +27,12 @@ const Register = () => {
         const newUser = {username, password, type}
 
         try {
-            await dispatch(registerThunk(newUser));
-            if (currentUser)
+            const registerResult = await dispatch(registerThunk(newUser));
+            if (registerResult.error) {
+                setError("User already exists!");
+            } else {
                 navigate("/profile");
-            else {
-                alert("User already exists!")
             }
-            ;
             console.log(username, password, type);
         } catch (e) {
             alert(e);
