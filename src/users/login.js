@@ -19,13 +19,12 @@ const Login = () => {
         setError(null)
         const loginUser = {username, password}
         try {
-            await dispatch(loginThunk(loginUser));
-            if (currentUser)
+            const loginResult = await dispatch(loginThunk(loginUser));
+            if (loginResult.error) {
+                setError("Invalid username or password");
+            } else {
                 navigate("/profile");
-            else {
-                alert("Incorrect password");
             }
-            ;
         } catch (e) {
             alert(e);
         }
